@@ -19,11 +19,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href='/MVC_Skeleton_master'>W.I.T Blog</a>
+          <a class="navbar-brand" href='?controller=pages&action=home'>W.I.T Blog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href='/MVC_Skeleton_master'>Home</a></li>
+            <li class="active"><a href='?controller=pages&action=home'>Home</a></li>
             <li><a href='?controller=post&action=readAll'>All Posts</a></li>
             <li><a href='?controller=post&action=create'>Create Post</a></li>
             <li class="dropdown">
@@ -129,7 +129,7 @@
   <body>
 
 <div class="w3-container w3-pink">
-    <?php require_once('routes.php'); ?>
+    <?php require_once('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php'); ?>
 </<div>
 <div class="w3-container w3-gray">
     <footer >

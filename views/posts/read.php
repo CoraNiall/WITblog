@@ -1,7 +1,11 @@
-<p>This is the requested post:</p>
 
+
+
+
+
+<center>
 <p>Post ID: <?php echo $post->id; ?></p>
-<p>Title: <?php echo $post->title; ?></p>
+<h1><p> <?php echo $post->title; ?></p> </h1>
 <p>Content: <?php echo $post->content; ?></p>
 <?php 
 $file = 'views/images/' . $post->title . '.jpeg';
@@ -15,4 +19,20 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 }
 
 ?>
-	
+
+</center>
+
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-6">
+        <form class="form-horizontal" action='controllers/comment_handler.php' method="POST">
+            <div class="form-group">
+                <label class="col-lg-3 control-label">Add Comment</label>
+                <div class="col-lg-9">
+                    <textarea class="form-control" rows="5" cols="10" name="content" placeholder="Comment here"></textarea>
+                </div>
+            </div>
+            <input type="submit" name="comment" value="Add Comment" class="btn btn-primary">
+        </form>
+    </div>
+</div>
