@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `mvc_witblog`
 --
+DROP DATABASE IF EXISTS mvc_withblog;
+CREATE DATABASE IF NOT EXISTS mvc_withblog DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE mvc_withblog;
 
 -- --------------------------------------------------------
 
