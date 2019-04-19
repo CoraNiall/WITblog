@@ -1,7 +1,11 @@
 <?php
 
 class commentController {
-  
+    
+    public function addComment() {
+        var_dump("hello");
+    }
+    
     public function readAll() {
       // we store all the posts in a variable
       $comments = Comment::all();
