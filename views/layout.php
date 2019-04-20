@@ -52,7 +52,7 @@
             ?>
             <ul class = "login menu">
                 <?php require_once('routes.php'); ?>
-                <li><a href='?controller=login&action=getLogout'>Logout</a></li>
+                <li><a href='?controller=login&action=logout'>Logout</a></li>
                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
             </ul>
             <?php
@@ -129,7 +129,11 @@
   <body>
 
 <div class="w3-container w3-pink">
-    <?php require_once('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php'); ?>
+    <!--this bit below won't work on a PC setup, will need a more relative path. Comment out as required for testing purposes - CR-->
+    <?php require_once
+    /*
+    ('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php');*/
+    ('routes.php')?>
 </<div>
 <div class="w3-container w3-gray">
     <footer >
