@@ -43,7 +43,7 @@
 <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-6">
-        <form class="form-horizontal" action="?controller=comment&action=addComment" method="POST">
+        <form class="form-horizontal" action="?controller=comment&action=addComment&id=<?php echo $post->id;?>" method="POST">
             <div class="form-group">
                 <label class="col-lg-3 control-label">Add Comment</label>
                 <div class="col-lg-9">
