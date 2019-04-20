@@ -3,9 +3,17 @@
 class commentController {
     
     public function addComment() {
-        var_dump("hello");
+        
+        
+        if(isset($_POST['content'])&& $_POST['content']!=""){
+        $filteredContent = filter_input(INPUT_POST,'content', FILTER_SANITIZE_SPECIAL_CHARS);
     }
-    
+        $content = $filteredContent;
+        $post_id = intval($_GET['id']);
+         Comment::add($post_id, $content);
+        
+         require_once 'index.php';
+    }
     public function readAll() {
       // we store all the posts in a variable
       $comments = Comment::all();
