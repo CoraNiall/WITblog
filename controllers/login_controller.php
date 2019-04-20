@@ -15,10 +15,14 @@ class LoginController {
     else {
         $user = Login::findUser($_POST['email']);
         //go from here...    
-        if (!$user['email']) {
+        if ($user['email'] && ($user['username'])) {
+            return "The username or email is already regsitered.<br>";
+        }
+        
+        try {
                 Login::create();
                 require_once('views/login/userProfile.php');
-        }else {
+        }catch (Exception $ex) {
             return call('pages','error');
         }
     }

@@ -40,10 +40,8 @@ class Login {
     $req->execute(array('email' => $email,
                     'username' => $username));
     $user = $req->fetch();
-    if($user['email']) {
-        echo "Email is already registered. Please try again or log in.";
-    } elseif ($user['username']) {
-        echo "Username is already in use. Please try again.";
+    if($user['email'] && ($user['username'])) {
+        echo "Username or email is already registered. <br>Please try again or log in.<br>" ;
     } else {
         return false;
     }
