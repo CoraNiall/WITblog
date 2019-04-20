@@ -7,7 +7,23 @@
  */
         
 class LoginController {
-
+    
+    public function register() {
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
+        require_once('views/login/register.php');
+    }
+    else {
+        $user = Login::findUser($_POST['email']);
+        //go from here...    
+        if (!$user['email']) {
+                Login::create();
+                require_once('views/login/userProfile.php');
+        }else {
+            return call('pages','error');
+        }
+    }
+    }
+        
     //this is accessing the login form
 public function login(){
     //we expect a form of ?controller=login&action=login to show the login page
@@ -25,11 +41,7 @@ public function getLogout() {
     }
 }
 
-public function register() {
-    if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        require_once('views/login/register.php');
-    }
-}
+
 
 public function editProfile() {
     if($_SERVER['REQUEST_METHOD'] == 'GET') {

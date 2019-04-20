@@ -1,9 +1,26 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-echo "This is the registration page";
+<html>
+    <p>Fill in the following form to register:</p>
+<form action="" method="POST" class="w3-container" enctype="multipart/form-data">
+    
+    <h2>Register here!</h2>
+    <p>
+         <label>Please create a Username:</label>
+         <input class="w3-input" type="text" name="username" required autofocus>
+       
+    </p>
+    <p>
+        <label>Email:</label>
+        <input class="w3-input" type="text" name="email" required autofocus>
+        
+    </p>
+        <p>
+        <label>Password:</label>
+        <input class="w3-input" type="text" name="password" required>
+        
+    </p>
+       
+  <p>
+    <input class="w3-btn w3-pink" type="submit" value="Register">
+  </p>
+</form>
+</html>
