@@ -120,7 +120,7 @@
                     </div>
                 </div>
                  <div class="col-lg-9  col-md-9">
-                    <?php require_once('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php'); ?>
+                    <?php require_once('routes.php'); ?>
                 </div>
             </div>
             <div class="row">
