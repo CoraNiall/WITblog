@@ -5,12 +5,19 @@
     
     <h2>Login here!</h2>
     <p>
-        <input class="w3-input" type="text" name="username" required autofocus>
         <label>Username</label>
+        <input class="w3-input" type="text" name="username" required autofocus>
+        
     </p>
         <p>
-        <input class="w3-input" type="text" name="password" required>
+        <label>Email</label>
+        <input class="w3-input" type="text" name="email" required autofocus>
+        
+    </p>
+        <p>
         <label>Password</label>
+        <input class="w3-input" type="text" name="password" required>
+        
     </p>
        
   <p>
