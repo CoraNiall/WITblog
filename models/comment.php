@@ -21,11 +21,10 @@ class Comment {
     //Need to figure out how to autofill user_id, maybe when have sorted out login?
     //For now ADDED user_id into the function and hardcoded the result to marry with our ADMIN user on PK 1 in the database
     //For now hardcoded a $post_id for a post in my database until we work out how to attach post_id   
-    public static function add() {
-
-        include '../controllers/comment_handler.php';
-        require_once '../connection.php';
+    public static function add($post_id, $content) {
+//tried to include post_id through GET id in addComment method in commentController - URL now showing controller=comment&action=addComment&id=postid
         $db = Db::getInstance();
+        //$post_id = intval($id);
         $req = $db->prepare("INSERT INTO comment(content, date_time, user_id, post_id) values (:content, NOW(), :userid, :postid)");
         $req->bindParam(':content', $content);
         $req->bindParam(':userid', $user_id);
@@ -35,7 +34,7 @@ class Comment {
 
 
         $user_id = 1;
-        $post_id = 25;
+        //$post_id = 25;
 
         $req->execute();
     }
@@ -54,7 +53,7 @@ class Comment {
 
         foreach ($req->fetchAll() as $comment) {
             if ($comment) {
-                $list[] = new Comment($comment['id'], $comment['datetime'],$comment['content'],$comment['post_id'],$comment['user_id']); 
+                $list[] = new Comment($comment['id'], $comment['date_time'],$comment['content'],$comment['post_id'],$comment['user_id']); 
             }
         }
 
