@@ -15,6 +15,8 @@ public function login(){
         require_once('views/login/login.php');
     } else {
         Login::emailExists();
+        
+        require_once('views/posts/readAll');
     }
 }
 
@@ -25,9 +27,16 @@ public function getLogout() {
     }
 }
 
+
+
 public function register() {
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         require_once('views/login/register.php');
+    }
+    else {
+        Login::create();
+        require_once('views/posts/readAll.php');
+        //here add a link to the user homepage?
     }
 }
 
