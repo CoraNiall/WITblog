@@ -23,31 +23,35 @@ class Login {
         $this->active = $active;
     }
     
-    //check if a given email already exists in the db
-    public function emailExists(){
-        $db = DB::getInstance();
-        $req = $db->prepare("SELECT * from user WHERE email=? LIMIT 0,1");
-        $this->email= htmlspecialchars(strip_tags($this->email));
-        $req->bindParam(1, $this->email);
+    
+    public function emailExists() {
+        $db=DB::getInstance();
+        $req = $db->prepare ("SELECT * FROM user WHERE email =:email LIMIT 0,1");
+        $req->bindParam (':email', $email);
+        if(isset($_POST['email'])&& $_POST['email']!="")
+            {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
+        $email = $filteredEmail;
+        $email= htmlspecialchars(strip_tags(':email'));
+        
+
         $req->execute();
-        //count the occurences of the same email in the db
+                //count the occurences of the same email in the db
         $num = $req->rowCount();
-        //if email exists, assign values to object properties for easy access and use for php sessions
+
         if($num>0) {
+                /*if email exists, assign values to object properties for easy access and use for php sessions
+        
             $row = $req->fetch(PDO::FETCH_ASSOC);
             $this->id = $row['id'];
             $this->username = $row['username'];
             $this->email = $row['email'];
             $this->password = $row['password'];
-            $this->role_id = $row['role_id'];
-            //return true if email exists in db
+            $this->role_id = $row['role_id'];*/
             return TRUE;
         }
         else {
-            //return false if email is not in db
-            return false;
+            return FALSE;
         }
-        
     }
 
 
@@ -72,6 +76,7 @@ $password = $filteredPassword;
 $role_id = '1'; //this is admin user, change to 2 for registered user
 $active = '1'; //default boolean value means account is active
 $req->execute();
+    echo "Thanks for registering!";
     }
     
     public static function login() {
