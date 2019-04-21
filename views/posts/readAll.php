@@ -1,5 +1,4 @@
 
-
 <?php foreach($posts as $post) { ?>
   <p>
   <center> <h1>   <?php echo $post->title; ?> &nbsp; &nbsp; </h1>
