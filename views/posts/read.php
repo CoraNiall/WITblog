@@ -1,8 +1,3 @@
-
-
-
-
-
 <center>
 <p>Post ID: <?php echo $post->id; ?></p>
 <h1><p> <?php echo $post->title; ?></p> </h1>
@@ -17,7 +12,6 @@ else
 {
 echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 }
-
 ?>
 
 </center>
