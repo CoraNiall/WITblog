@@ -14,7 +14,7 @@ class Login {
     public $role_id;
     public $active;
     
-    public function __construct() {
+    public function __construct($id, $username, $email, $password, $role, $active) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
@@ -23,41 +23,12 @@ class Login {
         $this->active = $active;
     }
     
+
+   
     
-    public function emailExists() {
-        $db=DB::getInstance();
-        $req = $db->prepare ("SELECT * FROM user WHERE email =:email LIMIT 0,1");
-        $req->bindParam (':email', $email);
-        if(isset($_POST['email'])&& $_POST['email']!="")
-            {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
-        $email = $filteredEmail;
-        $email= htmlspecialchars(strip_tags(':email'));
-        
-
-        $req->execute();
-                //count the occurences of the same email in the db
-        $num = $req->rowCount();
-
-        if($num>0) {
-                /*if email exists, assign values to object properties for easy access and use for php sessions
-        
-            $row = $req->fetch(PDO::FETCH_ASSOC);
-            $this->id = $row['id'];
-            $this->username = $row['username'];
-            $this->email = $row['email'];
-            $this->password = $row['password'];
-            $this->role_id = $row['role_id'];*/
-            return TRUE;
-        }
-        else {
-            return FALSE;
-        }
-    }
-
-
     public static function create() {
         $db = Db::getInstance();
-        $req = $db->prepare("Insert into user(role_id, email, password, username, active) values (:role_id, :email, :password, :username, :active)");
+        $req = $db->prepare("INSERT INTO user(role_id, email, password, username, active) VALUES (:role_id, :email, :password, :username, :active)");
         $req->bindParam(':role_id', $role);
         $req->bindParam(':email', $email);
         $req->bindParam (':password', $password);
@@ -65,46 +36,68 @@ class Login {
         $req->bindParam (':active', $active);  
 // set parameters and execute
     if(isset($_POST['email'])&& $_POST['email']!="")
-    {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
-    if(isset($_POST['username'])&& $_POST['username']!="")
-        {$filteredUsername = filter_input(INPUT_POST,'username', FILTER_SANITIZE_SPECIAL_CHARS);}
+        {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
     if(isset($_POST['password'])&& $_POST['password']!="")
         {$filteredPassword = filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);}
+    if(isset($_POST['username'])&& $_POST['username']!="")
+        {$filteredUsername = filter_input(INPUT_POST,'username', FILTER_SANITIZE_SPECIAL_CHARS);}
+$role = '2';    
 $email = $filteredEmail;
 $username = $filteredUsername;
 $password = $filteredPassword;
-$role_id = '1'; //this is admin user, change to 2 for registered user
-$active = '1'; //default boolean value means account is active
+$active = '1';
 $req->execute();
-    echo "Thanks for registering!";
+echo "<div class='alert alert-info'>";
+        echo "Successfully registered. <a href='?controller=login&action=login'>Please login</a>.";
+    echo "</div>";
     }
+    
+    
+    
     
     public static function login() {
-        if($_POST) {
-            $db = Db::getInstance();
-            $login = new Login ($db);
-            //check if email and password are in the db
-            $login->email = $_POST['email'];
-            $email_exists->$login->emailExists();
-            }
-        if ($email_exists && password_verify($_POST['password'], $login->password) && $login->active==1){
-            $_SESSION['logged_in'] = true;
-            $_SESSION['id'] = $this->id;
-            $_SESSION['role_id'] = $this->role_id;
-            $_SESSION['username'] = htmlspecialchars($this->username, ENT_QUOTES, 'UTF-8');
-            //if role id is admin then redirect to Admin page
-            if($this->role_id=='admin') {
-             require_once('views/pages/admin.php');   
-            } else {
-                require_once('views/pages/home.php');
-            }
-        } else {
-            //if username does not exist or password is wrong
-            echo "Username or password is incorrect. Please try again.";
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare("SELECT * from user WHERE username=:username");
+        
+        if(isset($_POST['username'])&& $_POST['username']!="") {
+        $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+        }  
+    $username = $filteredUsername;
+    //$req->bindParam (':username', $username);
+    $req->execute(array('username'=>$username));
+    foreach ($req->fetchAll() as $user) {
+        if ($user) {
+            $list [] = new Login ($user['ID'], $user['username'], $user ['email'], $user['password'], $user ['role_id'], $user ['active']);
         }
     }
+    if ($list){
+       return $list;
+    }
     
-    public static function logout($id) {
+                 // Validate credentials
+                 if ($email_exists && password_verify($_POST['password'], $password)){
+                    
+                     // Password is correct, so start a new session
+                            session_start();
+                            
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username; 
+                            $_SESSION["role_id"] = $role;
+                          return $_SESSION;                
+    }else{
+        throw new Exception('The email or passowrd is incorrect.');
+    }
+                        }
+
+    
+    
+    
+    
+    public static function logout() {
+        $_SESSION = array();
         session_destroy();
         require_once('views/pages/home.php');
     }
