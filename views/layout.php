@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
+<?php
+session_start();
+?>
+
 
 </html>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -48,17 +52,18 @@
             <?php 
             //check if user was logged in
             //if so, show "Account" and "Logout" options
-            if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']== true && $_SESSION['role_id']=='reg_user') {
+           if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true && $_SESSION['role_id']==2) {
             ?>
             <ul class = "login menu">
-                <?php require_once('routes.php'); ?>
-                <li><a href='?controller=login&action=getLogout'>Logout</a></li>
+                <?php require_once('../routes.php'); ?>
+                <li><a href='?controller=login&action=Logout'>Logout</a></li>
                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
             </ul>
             <?php
             } else{
                 ?>
             <ul>
+                
                 <li><a href='?controller=login&action=login'>Login</a></li>
                 <li><a href='?controller=login&action=register'>Register</a></li>
             </ul>
@@ -99,7 +104,7 @@
                         <p> - Save your favourite posts!</p> 
                         <p> - Receive notifications when there's a new post! </P>
                         <p> - Give your opinion on our posts! </p> <br>
-                        <center> <a href="#" class="btn btn-default">Sign up Here!</a> </center>
+                        <center> <a href='?controller=login&action=register'class="btn btn-default">Sign up Here!</a> </center>
                     </ul>
                 </div>
                 <div class="well">
@@ -129,7 +134,7 @@
   <body>
 
 <div class="w3-container w3-pink">
-    <?php require_once('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php'); ?>
+    <?php require_once('routes.php'); ?>
 </<div>
 <div class="w3-container w3-gray">
     <footer >
