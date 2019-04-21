@@ -1,4 +1,5 @@
 <?php
+require_once('models/post.php');
 
 class Comment {
 
@@ -16,7 +17,13 @@ class Comment {
         $this->post_id = $post_id;
         $this->user_id = $user_id;
     }
-
+    
+    public static function showpost() {
+        $post = Post::find($_GET['id']);
+      require_once('views/posts/read.php');
+    }
+    
+    
     //This add() function is used to add a comment and is used in posts/read.php (linked by comment_controller.php)
     //Need to figure out how to autofill user_id, maybe when have sorted out login?
     //For now ADDED user_id into the function and hardcoded the result to marry with our ADMIN user on PK 1 in the database
@@ -37,8 +44,15 @@ class Comment {
         //$post_id = 25;
 
         $req->execute();
+   
     }
 
+    
+    
+    
+    
+    
+    
 // This amended find() function prints out all of the comments where post_id = :id, and loops through them.
 // To be used on read post page 
     public static function find($id) {
