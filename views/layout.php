@@ -55,7 +55,7 @@ session_start();
            if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true && $_SESSION['role_id']==2) {
             ?>
             <ul class = "login menu">
-                <?php require_once('../routes.php'); ?>
+                <?php //require_once('../routes.php'); ?>
                 <li><a href='?controller=login&action=Logout'>Logout</a></li>
                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
             </ul>
