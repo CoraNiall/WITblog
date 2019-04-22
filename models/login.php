@@ -12,15 +12,15 @@ class Login {
     public $email;
     public $password;
     public $role_id;
-    public $active;
+   // public $active;
     
-    public function __construct($id, $username, $email, $password, $role, $active) {
-        $this->id = $id;
+    public function __construct($username, $email, $password, $role) {
+        
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->role_id = $role;
-        $this->active = $active;
+
     }
     
 
@@ -53,44 +53,43 @@ echo "<div class='alert alert-info'>";
     }
     
     
-    
-    
-    public static function login() {
+    public static function session($list){
+        session_start();
+        if (empty ($_SESSION)){
+           throw new Exception('Please Login to access this page');           
+        }
+        
+        // Store data in session variables
+                                
+    }
+
+
+    public static function login($username) {
         $list = [];
         $db = DB::getInstance();
         $req = $db->prepare("SELECT * from user WHERE username=:username");
-        
-        if(isset($_POST['username'])&& $_POST['username']!="") {
-        $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
-        }  
-    $username = $filteredUsername;
-    //$req->bindParam (':username', $username);
-    $req->execute(array('username'=>$username));
-    foreach ($req->fetchAll() as $user) {
+
+        //$req->bindParam (':username', $username);
+        $req->execute(array('username'=>$username));
+        $user = $req->fetch ();
         if ($user) {
-            $list [] = new Login ($user['ID'], $user['username'], $user ['email'], $user['password'], $user ['role_id'], $user ['active']);
+            return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
+            
         }
-    }
-    if ($list){
-       return $list;
-    }
-    
-                 // Validate credentials
-                 if ($email_exists && password_verify($_POST['password'], $password)){
+        // Validate credentials
+                 if (password_verify($_POST['password'], $user['password'])){
                     
                      // Password is correct, so start a new session
                             session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username; 
-                            $_SESSION["role_id"] = $role;
-                          return $_SESSION;                
+                             $_SESSION["loggedin"] = true;
+                            $_SESSION["username"] = $user['username']; 
+                            $_SESSION["role_id"] = $user['role_id'];
+                                    
     }else{
         throw new Exception('The email or passowrd is incorrect.');
     }
-                        }
+    }
+                        
 
     
     
