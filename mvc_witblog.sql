@@ -6,7 +6,10 @@
 -- Generation Time: Apr 20, 2019 at 11:19 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.0.33
+DROP DATABASE IF IT EXISTS mvc_witblog;
+CREATE DATABASE mvc_witblog;
 
+USE WITBlog;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -291,6 +294,11 @@ ALTER TABLE `session`
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`ID`);
 COMMIT;
+
+--
+-- Add new role: registered_user
+--
+INSERT INTO 'role' ('roles') VALUES ('registered_user');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
