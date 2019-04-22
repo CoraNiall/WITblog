@@ -8,13 +8,19 @@
         
 class LoginController {
 
+ 
+    
     //this is accessing the login form
 public function login(){
     //we expect a form of ?controller=login&action=login to show the login page
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         require_once('views/login/login.php');
     } else {
-        Login::login();
+                if(isset($_POST['username'])&& $_POST['username']!="") {
+        $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+        }  
+    $username = $filteredUsername;
+        $login= Login::login($username);
           /*if($role->role_id==1) {
              require_once('../views/pages/admin.php');  
              echo "<div class='alert alert-info'>";
@@ -30,9 +36,10 @@ public function login(){
                    $access_denied=true;
             }*/
             require_once('views/pages/userProfile.php');
-        echo "<div class='alert alert-info'>";
-        echo "Successfully logged in.";
-    echo "</div>";
+           // print_r($list);
+        //echo "<div class='alert alert-info'>";
+        //echo "Successfully logged in.";
+    //echo "</div>";
 
     }
 }
