@@ -35,13 +35,16 @@ public function login(){
          else{
                    $access_denied=true;
             }*/
+            if ($login){  
+            Login::setSession($login);
             require_once('views/pages/userProfile.php');
-           // print_r($list);
-        //echo "<div class='alert alert-info'>";
-        //echo "Successfully logged in.";
-    //echo "</div>";
+            print_r($_SESSION);
+            echo "<div class='alert alert-info'>";
+            echo "Successfully logged in.";
+            echo "</div>";
 
     }
+}
 }
 
 public function Logout() {
