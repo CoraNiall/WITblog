@@ -126,10 +126,7 @@
                     </div>
                 </div>
                  <div class="col-lg-9  col-md-9">
-                     <!--link below commented out for PC user, uncomment for MAC users-->
-                    <?php require_once
-                    ('/Applications/XAMPP/xamppfiles/htdocs/WITblog/routes.php');
-                    ('routes.php')?>
+                    <?php require_once('routes.php'); ?>
                 </div>
             </div>
             <div class="row">
@@ -140,7 +137,6 @@
                 </footer>
             </div>
         </div>
-
     </body>
 </html>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
