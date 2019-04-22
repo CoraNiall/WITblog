@@ -53,15 +53,7 @@ echo "<div class='alert alert-info'>";
     }
     
     
-    public static function session($list){
-        session_start();
-        if (empty ($_SESSION)){
-           throw new Exception('Please Login to access this page');           
-        }
-        
-        // Store data in session variables
-                                
-    }
+    
 
 
     public static function login($username) {
@@ -75,23 +67,25 @@ echo "<div class='alert alert-info'>";
         if ($user) {
             return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
             
-        }
         // Validate credentials
-                 if (password_verify($_POST['password'], $user['password'])){
+                 //if (password_verify($_POST['password'], $user['password'])){
                     
                      // Password is correct, so start a new session
-                            session_start();
-                             $_SESSION["loggedin"] = true;
-                            $_SESSION["username"] = $user['username']; 
-                            $_SESSION["role_id"] = $user['role_id'];
-                                    
+                            
     }else{
         throw new Exception('The email or passowrd is incorrect.');
     }
     }
                         
 
-    
+    Public static function setSession($login){
+        //login is verified, so start a new session
+
+                                 $_SESSION["loggedin"] = true;
+                                $_SESSION["username"] = $_POST ['username']; 
+                                $_SESSION["role_id"] = $login->role_id;
+                                
+    }
     
     
     
