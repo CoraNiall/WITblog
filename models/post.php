@@ -1,6 +1,7 @@
 <?php
 
 require_once('models/comment.php');
+require_once('models/tag.php');
 
 class Post {
 
@@ -9,13 +10,15 @@ class Post {
     public $title;
     public $content;
     public $comments;
+    public $tag;
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments=false) {
+    public function __construct($id, $title, $content, $comments=false, $tag=false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->comments = $comments;
+        $this->tag = $tag;
         //$this->userid = $userid;
     }
 
@@ -44,9 +47,10 @@ class Post {
         $post = $req->fetch();
 
         $comments = Comment::find($id);
+        $tag = Tag::find($id);
 
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
@@ -87,7 +91,7 @@ class Post {
 
     public static function add() {
         $db = Db::getInstance();
-        $req = $db->prepare("Insert into post(title, content, user_id) values (:title, :content, :user_id)");
+        $req = $db->prepare("Insert into post(title, content, user_id, post_date) values (:title, :content, :user_id, NOW());");
         $req->bindParam(':title', $title);
         $req->bindParam(':content', $content);
         $req->bindParam(':user_id', $user_id);
@@ -106,8 +110,39 @@ class Post {
 
 //upload post image
         Post::uploadFile($title);
+        Post::addTags();
     }
 
+    
+    public static function getTagID() {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT ID FROM TAG WHERE TAG= :tag");
+        $req->bindParam(':tag', $tag);
+        
+         if (isset($_POST['tag']) && $_POST['tag'] != "") {
+            $tag = $_POST['tag'];
+        }
+        
+        $req->execute(array('tag' => $tag));
+        $tagidarray = $req ->fetch();
+        $tag_id= $tagidarray[0];
+    }
+
+    public static function addTags() {
+        $db = Db::getInstance();
+        $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES(:POST_ID, :TAG_ID);");
+        $req->bindParam(':POST_ID', $postid);
+        $req->bindParam(':TAG_ID', $tagid);    
+        
+        Post::getTagID();
+        Post::find($id);
+        
+        $tagid=$tag_id;
+        $postid=$post['id']; //This hasn't been allocated yet!
+        $req->execute();
+        
+    }
+    
 //changed the slashes here from \ to /
 
     const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
