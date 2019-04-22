@@ -7,7 +7,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "styles.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "/MVC_Skeleton_testingGround/views/css/styles.css" />
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
     </head>
 
     <body>
@@ -33,13 +35,13 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Melanie</a></li>
                                     <li><a href="#">Caroline</a></li>
-                                    <li><a href="#">Natasha</a></li>
-                                    <li><a href="#"> Laura</a></li>
                                     <li><a href="#">Jessie</a></li>
+                                    <li><a href="#"> Laura</a></li>
+                                    <li><a href="#">Tasha</a></li>
 
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> 
 
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="./"> Topics <span class="sr-only">(current)</span></a></li>
@@ -47,6 +49,7 @@
                             <li><a href="#" class="fa fa-twitter"></a></li>
                             <li><a href="#" class="fa fa-instagram"></a></li>
                         </ul>
+                        
                         <?php
                         //check if user was logged in
                         //if so, show "Account" and "Logout" options
@@ -54,7 +57,7 @@
                             ?>
                             <ul class = "login menu">
                                 <?php require_once('routes.php'); ?>
-                                <li><a href='?controller=login&action=getLogout'>Logout</a></li>
+                                <li><a href='?controller=login&action=logout'>Logout</a></li>
                                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
                             </ul>
                             <?php
@@ -71,10 +74,11 @@
                 </div>
             </nav>
         </div>
+        <br>
         <div>
             <section class="banner-section">
                 <div class="w3-content">
-                    <img class="mySlides" src="https://www.snipp.com/wp-content/uploads/2018/12/Women-in-tech-blog-banner.png" alt="custom_html_banner1" style="width: 100%; height:15em ">
+                    <img class="mySlides"  src="https://www.snipp.com/wp-content/uploads/2018/12/Women-in-tech-blog-banner.png" alt="custom_html_banner1" width="99%" height="250em" >
                 </div>
             </section>
         </div>
@@ -82,7 +86,9 @@
         <br>
         <br>
         <div class="container">
+            
             <div class="row">
+         
                 <div class="col-lg-3  col-md-3">
                     <div class="well">
                         <center> <h2>Search for a post...</h2> </center> <br>
@@ -125,9 +131,14 @@
             </div>
             <div class="row">
                 <footer>
+                   
+                    
                     <center>    Copyright &COPY; <?= date('Y'); ?> </center>
                 </footer>
             </div>
         </div>
     </body>
 </html>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
