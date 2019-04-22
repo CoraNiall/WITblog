@@ -15,6 +15,6 @@ class PagesController {
     
     public function userProfile(){
         require_once ('views/pages/userProfile.php');
-        $username = ($_SESSION(':username'));
+        
     }
 }
