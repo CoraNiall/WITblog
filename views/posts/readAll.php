@@ -1,5 +1,5 @@
 
-<link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 <?php foreach ($posts as $post) { ?>
 
     <section class="post-content-section">
