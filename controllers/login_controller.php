@@ -21,7 +21,7 @@ class LoginController {
         
         try {
                 Login::create();
-                require_once('views/login/userProfile.php');
+                require_once('views/login/login.php');
         }catch (Exception $ex) {
             return call('pages','error');
         }
@@ -57,8 +57,6 @@ public function login(){
         if ($login){  
             Login::setSession($login);
             require_once('views/pages/userProfile.php');
-            print_r($_SESSION);
-           // print_r($list);
         //echo "<div class='alert alert-info'>";
         //echo "Successfully logged in.";
     //echo "</div>";
