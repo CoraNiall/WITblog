@@ -103,6 +103,7 @@ class Post {
         if (isset($_POST['content']) && $_POST['content'] != "") {
             $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
         }
+        //echo var_dump($_POST);
         $title = $filteredTitle;
         $content = $filteredContent;
         $user_id = 1;
@@ -111,34 +112,18 @@ class Post {
 //upload post image
         Post::uploadFile($title);
         Post::addTags();
-    }
-
-    
-    public static function getTagID() {
-        $db = Db::getInstance();
-        $req = $db->prepare("SELECT ID FROM TAG WHERE TAG= :tag");
-        $req->bindParam(':tag', $tag);
         
-         if (isset($_POST['tag']) && $_POST['tag'] != "") {
-            $tag = $_POST['tag'];
-        }
-        
-        $req->execute(array('tag' => $tag));
-        $tagidarray = $req ->fetch();
-        $tag_id= $tagidarray[0];
     }
 
     public static function addTags() {
         $db = Db::getInstance();
-        $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES(:POST_ID, :TAG_ID);");
-        $req->bindParam(':POST_ID', $postid);
-        $req->bindParam(':TAG_ID', $tagid);    
+        $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES((SELECT ID FROM POST WHERE TITLE=:title), :TAG_ID);");
+        $req->bindParam(':title', $title);
+        $req->bindParam(':TAG_ID', $tag_id);    
         
-        Post::getTagID();
-        Post::find($id);
-        
-        $tagid=$tag_id;
-        $postid=$post['id']; //This hasn't been allocated yet!
+        $title = $_POST['title'];
+        $tag_id = $_POST['tag'];
+
         $req->execute();
         
     }

@@ -25,7 +25,7 @@
                 <select name="tag" class="form-control" id="sel2">
                     <?php
                     foreach ($tags as $tag) {
-                        echo "<option value=" . $tag->tag . ">" . $tag->tag . "</option>";
+                        echo "<option value=" . $tag->id . ">" . $tag->tag . "</option>";
                     }
                     ?>
                 </select>

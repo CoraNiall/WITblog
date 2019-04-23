@@ -27,7 +27,7 @@ class PostController {
       // if it's a GET request display a blank form for creating a new post
       // else it's a POST so add to the database and redirect to readAll action
       if($_SERVER['REQUEST_METHOD'] == 'GET'){
-          $tags = Tag::all();
+            $tags = Tag::all();
           require_once('views/posts/create.php');
       }
       else { 
