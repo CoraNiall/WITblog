@@ -14,13 +14,13 @@ class Login {
     public $role_id;
     public $active;
     
-    public function __construct($id, $username, $email, $password, $role, $active) {
+    public function __construct($username, $email, $password, $role) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->role_id = $role;
-        $this->active = $active;
+       // $this->active = $active;
     }
     
     //check if a given email already exists in the db
@@ -70,29 +70,33 @@ $active = '1';
 $req->execute();
     }
     
-    public static function login() {
-        if($_POST) {
-            $db = Db::getInstance();
-            $login = new Login ($db);
-            //check if email and password are in the db
-            $login->email = $_POST['email'];
-            $email_exists = $login->emailExists();
-            }
-        if ($email_exists && password_verify($_POST['password'], $login->password) && $login->active==1){
-            $_SESSION['logged_in'] = true;
-            $_SESSION['id'] = $login->id;
-            $_SESSION['role_id'] = $login->role_id;
-            $_SESSION['username'] = htmlspecialchars($login->username, ENT_QUOTES, 'UTF-8');
-            //if role id is admin then redirect to Admin page
-            if($login->role_id=='admin') {
-             require_once('views/pages/admin.php');   
-            } else {
-                require_once('views/pages/home.php');
-            }
-        } else {
-            //if username does not exist or password is wrong
-            echo "Username or password is incorrect. Please try again.";
-        }
+    public static function login($username) {
+        $list = [];
+        $db = DB::getInstance();
+        $req = $db->prepare("SELECT * from user WHERE username=:username");
+
+        //$req->bindParam (':username', $username);
+        $req->execute(array('username'=>$username));
+        $user = $req->fetch ();
+        if ($user) {
+            return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
+            
+        
+        // Validate credentials
+                // }if (password_verify($_POST['password'], $user['password'])){
+                                    
+    }else{
+        throw new Exception('The email or passowrd is incorrect.');
+    }
+    }
+                        
+    Public static function setSession($login){
+        //login is verified, so start a new session
+
+                                 $_SESSION["loggedin"] = true;
+                                $_SESSION["username"] = $_POST ['username']; 
+                                $_SESSION["role_id"] = $login->role_id;
+                                
     }
     
     public static function logout($id) {
