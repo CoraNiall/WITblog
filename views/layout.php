@@ -8,7 +8,7 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "/MVC_Skeleton_testingGround/views/css/styles.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
     </head>
 
