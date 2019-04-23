@@ -14,7 +14,7 @@ class Login {
     public $role_id;
     
     public function __construct($username, $email, $password, $role) {
-        $this->id = $id;
+        //$this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
