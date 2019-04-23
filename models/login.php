@@ -12,7 +12,6 @@ class Login {
     public $email;
     public $password;
     public $role_id;
-    public $active;
     
     public function __construct($username, $email, $password, $role) {
         $this->id = $id;
@@ -20,7 +19,6 @@ class Login {
         $this->email = $email;
         $this->password = $password;
         $this->role_id = $role;
-       // $this->active = $active;
     }
     
     //check if a given email already exists in the db
@@ -49,12 +47,11 @@ class Login {
     
     public static function create() {
         $db = Db::getInstance();
-        $req = $db->prepare("INSERT INTO user(role_id, email, password, username, active) VALUES (:role_id, :email, :password, :username, :active)");
+        $req = $db->prepare("INSERT INTO user(role_id, email, password, username) VALUES (:role_id, :email, :password, :username)");
         $req->bindParam(':role_id', $role);
         $req->bindParam(':email', $email);
         $req->bindParam (':password', $password);
-        $req->bindParam (':username', $username);
-        $req->bindParam (':active', $active);  
+        $req->bindParam (':username', $username);  
 // set parameters and execute
     if(isset($_POST['email'])&& $_POST['email']!="")
         {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
@@ -66,7 +63,6 @@ $role = '2';
 $email = $filteredEmail;
 $username = $filteredUsername;
 $password = $filteredPassword;
-$active = '1';
 $req->execute();
     }
     
