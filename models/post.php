@@ -111,18 +111,28 @@ class Post {
 
 //upload post image
         Post::uploadFile($title);
-        Post::addTags();
+        
+//upload multiple tags
+        $tag=$_POST['tag'];
+        
+        foreach($tag as $value) {
+        Post::addTag($value);
+        }
         
     }
 
-    public static function addTags() {
+    public static function addTag($tag_id) {
         $db = Db::getInstance();
         $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES((SELECT ID FROM POST WHERE TITLE=:title), :TAG_ID);");
         $req->bindParam(':title', $title);
-        $req->bindParam(':TAG_ID', $tag_id);    
+        $req->bindParam(':TAG_ID', $id);    
         
-        $title = $_POST['title'];
-        $tag_id = $_POST['tag'];
+        if (isset($_POST['title']) && $_POST['title'] != "") {
+            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        
+        $title = $filteredTitle;
+        $id = $tag_id;
 
         $req->execute();
         
