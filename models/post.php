@@ -1,6 +1,7 @@
 <?php
 
 require_once('models/comment.php');
+require_once('models/tag.php');
 
 class Post {
 
@@ -9,13 +10,15 @@ class Post {
     public $title;
     public $content;
     public $comments;
+    public $tag;
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments=false) {
+    public function __construct($id, $title, $content, $comments=false, $tag=false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->comments = $comments;
+        $this->tag = $tag;
         //$this->userid = $userid;
     }
 
@@ -44,9 +47,10 @@ class Post {
         $post = $req->fetch();
 
         $comments = Comment::find($id);
+        $tag = Tag::find($id);
 
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
@@ -87,7 +91,7 @@ class Post {
 
     public static function add() {
         $db = Db::getInstance();
-        $req = $db->prepare("Insert into post(title, content, user_id) values (:title, :content, :user_id)");
+        $req = $db->prepare("Insert into post(title, content, user_id, post_date) values (:title, :content, :user_id, NOW());");
         $req->bindParam(':title', $title);
         $req->bindParam(':content', $content);
         $req->bindParam(':user_id', $user_id);
@@ -99,6 +103,7 @@ class Post {
         if (isset($_POST['content']) && $_POST['content'] != "") {
             $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
         }
+        //echo var_dump($_POST);
         $title = $filteredTitle;
         $content = $filteredContent;
         $user_id = 1;
@@ -106,8 +111,33 @@ class Post {
 
 //upload post image
         Post::uploadFile($title);
+        
+//upload multiple tags
+        $tag=$_POST['tag'];
+        
+        foreach($tag as $value) {
+        Post::addTag($value);
+        }
+        
     }
 
+    public static function addTag($tag_id) {
+        $db = Db::getInstance();
+        $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES((SELECT ID FROM POST WHERE TITLE=:title), :TAG_ID);");
+        $req->bindParam(':title', $title);
+        $req->bindParam(':TAG_ID', $id);    
+        
+        if (isset($_POST['title']) && $_POST['title'] != "") {
+            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        
+        $title = $filteredTitle;
+        $id = $tag_id;
+
+        $req->execute();
+        
+    }
+    
 //changed the slashes here from \ to /
 
     const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
