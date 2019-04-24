@@ -21,7 +21,7 @@ class LoginController {
         
         try {
                 Login::create();
-                require_once('views/login/userProfile.php');
+                require_once('views/login/login.php');
         }catch (Exception $ex) {
             return call('pages','error');
         }
@@ -34,7 +34,33 @@ public function login(){
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         require_once('views/login/login.php');
     } else {
-        Login::emailExists();
+                if(isset($_POST['username'])&& $_POST['username']!="") {
+        $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+        }  
+    $username = $filteredUsername;
+        $login= Login::login($username);
+          /*if($role->role_id==1) {
+             require_once('../views/pages/admin.php');  
+             echo "<div class='alert alert-info'>";
+             echo "Successfully logged in.";
+             echo "</div>";
+            } elseif ($role->role_id==2) {
+                require_once('../views/pages/userProfile.php');
+                echo "<div class='alert alert-info'>";
+                echo "Successfully logged in.";
+                echo "</div>";
+            }
+         else{
+                   $access_denied=true;
+            }*/
+        
+        if ($login){  
+            Login::setSession($login);
+            require_once('views/pages/userProfile.php');
+        //echo "<div class='alert alert-info'>";
+        //echo "Successfully logged in.";
+    //echo "</div>";
+}
     }
 }
 

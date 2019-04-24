@@ -1,9 +1,9 @@
 
 <html>
-    <p>Fill in the following form to login:</p>
+    <p>Login here!</p>
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     
-    <h2>Login here!</h2>
+    <h2>Fill in the following form to login:</h2>
     <p>
         <label>Username</label>
         <input class="w3-input" type="text" name="username" required autofocus>
@@ -16,7 +16,7 @@
     </p>
         <p>
         <label>Password</label>
-        <input class="w3-input" type="text" name="password" required>
+        <input class="w3-input" type="password" name="password" required>
         
     </p>
        

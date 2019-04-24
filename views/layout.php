@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<?php
+session_start();
+?>
 
 <html>
     <head>
@@ -8,7 +10,7 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "/MVC_Skeleton_testingGround/views/css/styles.css" />
+        <link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
     </head>
 
@@ -53,11 +55,11 @@
                         <?php
                         //check if user was logged in
                         //if so, show "Account" and "Logout" options
-                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['role_id'] == 'reg_user') {
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role_id'] == 2) {
                             ?>
                             <ul class = "login menu">
-                                <?php require_once('routes.php'); ?>
-                                <li><a href='?controller=login&action=logout'>Logout</a></li>
+                                <?php //require_once('routes.php'); ?>
+                                <li><a href='?controller=login&action=Logout'>Logout</a></li>
                                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
                             </ul>
                             <?php
@@ -106,7 +108,7 @@
                             <p> - Save your favourite posts!</p> 
                             <p> - Receive notifications when there's a new post! </P>
                             <p> - Give your opinion on our posts! </p> <br>
-                            <center> <a href="#" class="btn btn-default">Sign up Here!</a> </center>
+                            <center> <a href='?controller=login&action=register' class="btn btn-default">Sign up Here!</a> </center>
                         </ul>
                     </div>
                     <div class="well">

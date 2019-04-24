@@ -1,6 +1,8 @@
 
-<link rel = "stylesheet" type = "text/css" href = "/MVC_Skeleton_testingGround/views/css/styles.css" /> 
-<?php foreach($posts as $post) { ?>
+
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+<?php foreach ($posts as $post) { ?>
+
 
     <section class="post-content-section">
             <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
