@@ -16,6 +16,12 @@
     </div>
 </div>
 
+<div>
+    <div>
+        <p><?php echo $post->location; ?></p>
+    </div>
+</div>
+
 <?php
 if ($post->tag):
     foreach ($post->tag as $key => $value):

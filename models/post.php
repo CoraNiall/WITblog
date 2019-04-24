@@ -11,16 +11,54 @@ class Post {
     public $content;
     public $comments;
     public $tag;
+    public $location;
+
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments=false, $tag=false) {
+    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->comments = $comments;
         $this->tag = $tag;
+        $this->location = $location;
         //$this->userid = $userid;
     }
+    
+    public static function postSearch() {
+        $list = [];
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
+        $req->bindParam(':TAG_ID', $tagid);
+        
+        $tagid = $_POST['tag'];
+        $req->execute();
+        // we create a list of Post objects from the database results
+        foreach ($req->fetchAll() as $post) {
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+        }
+        return $list;
+    }
+    
+    public static function postSearchTitle() {
+        $list = [];
+        $db = Db::getInstance();
+        
+        $req = $db->prepare("SELECT * from POST WHERE TITLE LIKE :input");
+
+        $searchtext = "%{$_POST['input']}%";
+        $req->bindParam(':input',$searchtext);
+
+        
+        $req->execute();
+        // we create a list of Post objects from the database results
+        foreach ($req->fetchAll() as $post) {
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+        }
+        return $list;
+    }
+    
+
 
     /* This all() function prints out all of the blog posts, which then are printed in the readAll.php page (linked by post_controller.php) */
 
@@ -50,7 +88,7 @@ class Post {
         $tag = Tag::find($id);
 
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location']);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
@@ -91,10 +129,11 @@ class Post {
 
     public static function add() {
         $db = Db::getInstance();
-        $req = $db->prepare("Insert into post(title, content, user_id, post_date) values (:title, :content, :user_id, NOW());");
+        $req = $db->prepare("Insert into post(title, content, user_id, post_date, location) values (:title, :content, :user_id, NOW(), :location);");
         $req->bindParam(':title', $title);
         $req->bindParam(':content', $content);
         $req->bindParam(':user_id', $user_id);
+        $req->bindParam(':location', $location);
 
 // set parameters and execute
         if (isset($_POST['title']) && $_POST['title'] != "") {
@@ -107,37 +146,41 @@ class Post {
         $title = $filteredTitle;
         $content = $filteredContent;
         $user_id = 1;
+        
+        //Get location of post
+        $location = Post::getLocationFromIP();
+        
         $req->execute();
 
 //upload post image
         Post::uploadFile($title);
-        
+
 //upload multiple tags
-        $tag=$_POST['tag'];
-        
-        foreach($tag as $value) {
-        Post::addTag($value);
+        $tag = $_POST['tag'];
+
+        foreach ($tag as $value) {
+            Post::addTag($value);
         }
         
+
     }
 
     public static function addTag($tag_id) {
         $db = Db::getInstance();
         $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES((SELECT ID FROM POST WHERE TITLE=:title), :TAG_ID);");
         $req->bindParam(':title', $title);
-        $req->bindParam(':TAG_ID', $id);    
-        
+        $req->bindParam(':TAG_ID', $id);
+
         if (isset($_POST['title']) && $_POST['title'] != "") {
             $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
         }
-        
+
         $title = $filteredTitle;
         $id = $tag_id;
 
         $req->execute();
-        
     }
-    
+
 //changed the slashes here from \ to /
 
     const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -185,6 +228,33 @@ class Post {
         $req = $db->prepare('delete FROM post WHERE id = :id');
         // the query was prepared, now replace :id with the actual $id value
         $req->execute(array('id' => $id));
+    }
+
+    public static function getLocationFromIP() {
+        try {
+            // Get IP from client if available
+            $user_ip = $_SERVER['REMOTE_ADDR'];
+            // Make API call to get location of client
+            $geoClient = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+            // Make API call to get location of server as a fallback
+            $geoServer = unserialize(file_get_contents("http://www.geoplugin.net/php.gp"));
+            // If can get location of client, return city and country of client as a string
+            if ($geoClient["geoplugin_countryName"] && $geoClient["geoplugin_city"]) {
+                $country = $geoClient["geoplugin_countryName"];
+                $city = $geoClient["geoplugin_city"];
+                return "$city, $country";
+                // If can't get location of client, return city and country of the server as a string
+            } else if ($geoServer["geoplugin_countryName"] && $geoServer["geoplugin_city"]) {
+                $country = $geoServer["geoplugin_countryName"];
+                $city = $geoServer["geoplugin_city"];
+                return "$city, $country";
+            } else {
+                return 'Unknown location';
+            };
+            // Catch block just to make sure that if theres an issue with the API, will always return something
+        } catch (Exception $e) {
+            return 'Unknown location';
+        }
     }
 
 }
