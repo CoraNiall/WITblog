@@ -55,7 +55,7 @@ session_start();
                         <?php
                         //check if user was logged in
                         //if so, show "Account" and "Logout" options
-                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['role_id'] == 2) {
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role_id'] == 2) {
                             ?>
                             <ul class = "login menu">
                                 <?php //require_once('routes.php'); ?>
