@@ -10,7 +10,7 @@ session_start();
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel = "stylesheet" type = "text/css" href = "/MVC_Skeleton_testingGround/views/css/styles.css" />
+        <link rel = "stylesheet" type = "text/css" href = "/WITblog/views/css/styles.css" />
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
     </head>
 
@@ -31,7 +31,13 @@ session_start();
                         <ul class="nav navbar-nav">
                             <li class="active"><a href='?controller=pages&action=home'>Home</a></li>
                             <li><a href='?controller=post&action=readAll'>All Posts</a></li>
+                            <?php
+                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['role_id']==1){
+                            ?>
                             <li><a href='?controller=post&action=create'>Create Post</a></li>
+                            <?php
+                            }
+                            ?>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Authors <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -47,31 +53,35 @@ session_start();
 
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="./"> Topics <span class="sr-only">(current)</span></a></li>
+                            
+                                <?php
+                        //check if user was logged in
+                        //if so, show "Account" and "Logout" options
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && ($_SESSION['role_id'] == 2 || $_SESSION ['role'] == 1)) {
+                            ?>
+                            <li class ="active">
+                            <ul class = "login menu">
+                                <?php //require_once('routes.php'); ?>
+                                <li><a href='?controller=login&action=logout'>Logout</a></li>
+                                <li><a href='?controller=login&action=userProfile'>Account</a></li>
+                           
+                            <?php
+                        } else {
+                            ?>
+                                <li><a href='?controller=login&action=login'>Login</a></li>
+                                <li><a href='?controller=login&action=register'>Register</a></li>
+                            </ul>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                               
                             <li><a href="#" class="fa fa-facebook"></a></li>
                             <li><a href="#" class="fa fa-twitter"></a></li>
                             <li><a href="#" class="fa fa-instagram"></a></li>
                         </ul>
                         
-                        <?php
-                        //check if user was logged in
-                        //if so, show "Account" and "Logout" options
-                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['role_id'] == 2) {
-                            ?>
-                            <ul class = "login menu">
-                                <?php //require_once('routes.php'); ?>
-                                <li><a href='?controller=login&action=Logout'>Logout</a></li>
-                                <li><a href='?controller=login&action=userProfile'>Account</a></li>
-                            </ul>
-                            <?php
-                        } else {
-                            ?>
-                            <ul>
-                                <li><a href='?controller=login&action=login'>Login</a></li>
-                                <li><a href='?controller=login&action=register'>Register</a></li>
-                            </ul>
-                            <?php
-                        }
-                        ?>
+                        
                     </div><!--/.nav-collapse -->
                 </div>
             </nav>
