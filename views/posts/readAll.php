@@ -12,9 +12,9 @@
             </div>
             <center>
                 <p class="text">
-                    <?php echo substr($post->content, 0, 200) . "..."; ?> 
+                <p> <?php echo substr($post->content, 0, 200) . "..."; ?> 
                     &nbsp;
-                    &nbsp;
+                    &nbsp;</p>
                     <br>
                     <a class="w3-btn w3-pink" href='?controller=post&action=read&id=<?php echo $post->id; ?>'>View post</a> &nbsp; &nbsp;
                     <a href='?controller=post&action=delete&id=<?php echo $post->id; ?>'>Delete post</a> &nbsp; &nbsp;
