@@ -183,31 +183,96 @@ class Post {
 
 //changed the slashes here from \ to /
 
-    const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
     const InputKey = 'myUploader';
 
 //die() function calls replaced with trigger_error() calls
 //replace with structured exception handling
     public static function uploadFile(string $title) {
 
-        if (empty($_FILES[self::InputKey])) {
-            //die("File Missing!");
-            trigger_error("File Missing!");
+        $errors = array();
+        $uploadedFiles = array();
+        $extension = array("jpeg","jpg","png","gif");
+        $UploadFolder = "views/images/";                 //************//
+        
+        $counter = 0;
+ 
+        foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
+            $temp = $_FILES["files"]["tmp_name"][$key];
+            $name = $_FILES["files"]["name"][$key];
+
+            if(empty($temp))
+            {
+                break;
+            }
+
+            $counter++;
+            $UploadOk = true;
+            $ext = pathinfo($name, PATHINFO_EXTENSION);
+            if(in_array($ext, $extension) == false){
+                $UploadOk = false;
+                array_push($errors, $name." is invalid file type.");
+            }
+
+            if(file_exists($UploadFolder."/".$name) == true){
+                $UploadOk = false;
+                array_push($errors, $name." file already exists.");
+            }
+
+            if($UploadOk == true){
+                move_uploaded_file($temp,$UploadFolder."/".$name);
+                array_push($uploadedFiles, $name);
+            }
         }
 
-        if ($_FILES[self::InputKey]['error'] > 0) {
-            trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
+        if($counter>0){
+            if(count($errors)>0)
+        {
+        echo "<b>Errors:</b>";
+        echo "<br/><ul>";
+        foreach($errors as $error)
+        {
+            echo "<li>".$error."</li>";
         }
+        echo "</ul><br/>";
+    }
+     
+    if(count($uploadedFiles)>0){
+        echo "<b>Uploaded Files:</b>";
+        echo "<br/><ul>";
+        foreach($uploadedFiles as $fileName)
+        {
+            echo "<li>".$fileName."</li>";
+        }
+        echo "</ul><br/>";
+         
+        echo count($uploadedFiles)." file(s) are successfully uploaded.";
+    }                               
+}
+else{
+    echo "Please, Select file(s) to upload.";
+}
+                /* if (empty($_FILES["files"])) {
+                        //die("File Missing!");
+                        trigger_error("File Missing!");
+                    }
+
+                    if ($_FILES["files"]['error'] > 0) {
+                        trigger_error("Handle the error! " . $_FILES["files"]['error']);
+                    }
 
 
-        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
-            trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
-        }
+                    if (!in_array($_FILES["files"]['type'], self::AllowedTypes)) {
+                        trigger_error("Handle File Type Not Allowed: " . $_FILES["files"]['type']);
+                    }
+                
+                
 //changed the $path location  - implfied it to only views/images/
-        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+        foreach ($_FILES["files"]['tmp_name'] as $key=>$tmp_name){
+        $tempFile = $_FILES["files"]['tmp_name'][$key];
         $path = "views/images/";
         $destinationFile = $path . $title . '.jpeg';
-
+        }
         if (!move_uploaded_file($tempFile, $destinationFile)) {
             trigger_error("Handle Error");
         }
@@ -215,7 +280,7 @@ class Post {
         //Clean up the temp file
         if (file_exists($tempFile)) {
             unlink($tempFile);
-        }
+        }*/
     }
 
     /* The remove($id) function is used to remove blog posts, is used in readAll.php (linked by product_controller) */
