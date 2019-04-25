@@ -1,16 +1,84 @@
+
+
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+<?php require_once('models/view.php');
+
+$post = MostViewed()[0];?>
 
 
 <div class="homepage">
-    
+
     <p> Welcome to our blog <p>
-    
-    
-    
+
+
+
+</div>
+
+<div>
+    <p>Hello <?php
+        if (!empty($_SESSION)) {
+            echo $_SESSION['username'];
+        } else {
+            echo"Guest";
+        }
+        ?>!<p>
 </div>
 
 
-<p>Hello <?php if (!empty($_SESSION)) {echo $_SESSION['username'];
-            }else {echo"Guest";} ?>!<p>
-<p>This is now the home page for the W.I.T Final Project Blog</p>
-<p>This is an adaptation of the MVC Skeleton Application</p>
+<div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="views/images/standard/CarouselOne.jpg" alt="Chania">
+            <div class="carousel-caption">
+                <h3>Women in Tech</h3>
+                <p>Image number one!</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="views/images/standard/CarouselTwo.jpg" alt="Chicago">
+            <div class="carousel-caption">
+                <h3>Women in Tech</h3>
+                <p>Image number two!</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="views/images/standard/CarouselThree.jpeg" alt="New York">
+            <div class="carousel-caption">
+                <h3>Women in Tech</h3>
+                <p>Image number three!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+</div>
+
+
+<div class="mx-auto bg-warning" style="width:850px">
+<div class="panel panel-default">
+
+    <h3>Currently, the most viewed post is...</h3>
+    <h4> <?php echo $post->title; ?></h4>
+
+</div>
+</div>
