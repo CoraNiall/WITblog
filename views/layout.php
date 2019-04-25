@@ -48,32 +48,26 @@ session_start();
 
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="./"> Topics <span class="sr-only">(current)</span></a></li>
+                            <?php
+                            //check if user was logged in
+                            //if so, show "Account" and "Logout" options
+                            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && ($_SESSION['role_id'] == 2|| $_SESSION ['role_id'] == 1)) {
+                                ?>
+                                    <li><a href='?controller=login&action=logout'>Logout</a></li>
+                                    <li><a href='?controller=login&action=userProfile'>Account</a></li>
 
+                                <?php
+                            } else {
+                                ?>
+                                    <li><a href='?controller=login&action=login'>Login</a></li>
+                                    <li><a href='?controller=login&action=register'>Register</a></li>
+                                <?php
+                            }
+                            ?>
                             <li><a href="#" class="fa fa-facebook"></a></li>
                             <li><a href="#" class="fa fa-twitter"></a></li>
                             <li><a href="#" class="fa fa-instagram"></a></li>
-                        
-
-                        <?php
-                        //check if user was logged in
-                        //if so, show "Account" and "Logout" options
-                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && ($_SESSION['role_id'] == 2|| $_SESSION ['role_id'] == 1)) {
-                            ?>
-                            <li class ="active">
-                            <ul class = "login menu">
-                                <li><a href='?controller=login&action=logout'>Logout</a></li>
-                                <li><a href='?controller=login&action=userProfile'>Account</a></li>
-                           
-                            <?php
-                        } else {
-                            ?>
-                                <li><a href='?controller=login&action=login'>Login</a></li>
-                                <li><a href='?controller=login&action=register'>Register</a></li>
-                            </ul>
-                            </li>
-                            <?php
-                        }
-                        ?>
+                      
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
