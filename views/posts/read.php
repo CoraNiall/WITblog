@@ -1,4 +1,10 @@
-<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
 
 
 
@@ -10,22 +16,24 @@
 
 <div>
     <div>
-        <p><?php echo $post->content; ?></p>
+        <p class="blog"><?php echo $post->content; ?></p>
+    </div>
+</div>
+
+<div>
+    <div><svg viewBox="0 0 8 8"><use xlink:href="#location"></use></svg>
+        <p><span class="glyphicon glyphicon-map-marker"><?php echo $post->location; ?></span></p>
     </div>
 </div>
 
 <div>
     <div>
-        <p><?php echo $post->location; ?></p>
+        <p><?php echo $post->views; ?> views!</p>
     </div>
 </div>
 
-<div>
-    <div>
-        <p><?php echo $post->views; ?></p>
-    </div>
-</div>
-
+  <div>
+      <table class="tags"> Tags:
 <?php
 if ($post->tag):
     foreach ($post->tag as $key => $value):
@@ -34,7 +42,8 @@ if ($post->tag):
 
    <?php endforeach; ?>
 <?php endif; ?>
-
+      </table>
+</div>
 
 <?php
 if ($post->comments):
@@ -62,7 +71,7 @@ if (file_exists($file)) {
     <div class="col-lg-6">
         <form class="form-horizontal" action="?controller=comment&action=addComment&id=<?php echo $post->id; ?>" method="POST">
             <div class="form-group">
-                <label class="col-lg-3 control-label">Add Comment</label>
+                <label class="col-lg-3 control-label">Comment</label>
                 <div class="col-lg-9">
                     <textarea class="form-control" rows="5" cols="10" name="content" placeholder="Comment here"></textarea>
                 </div>
