@@ -1,6 +1,9 @@
 
 
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+<?php require_once('models/view.php');
+
+$post = MostViewed()[0];?>
 
 
 <div class="homepage">
@@ -67,5 +70,15 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
+</div>
+
+
+<div class="mx-auto bg-warning" style="width:850px">
+<div class="panel panel-default">
+
+    <h3>Currently, the most viewed post is...</h3>
+    <h4> <?php echo $post->title; ?></h4>
+
 </div>
 </div>
