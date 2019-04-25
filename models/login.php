@@ -139,14 +139,55 @@ $req->execute(array('username'=>$username,
                     'email'=>$email,
                     'password'=>$password,
                     'role_id'=>$role));
-        $user = $req->fetch();
+
+
+        if (!empty($_FILES[self::InputKey]['name'])) {
+        Login::uploadFile($username);
+        }
         
+        
+        /*$user = $req->fetch();
         if($user) {
             return new Login($user['username'], $user['email'], $user['password'], $user['role_id']);
         } else {
             throw new Exception('User not found.');
-        }
+        }*/
 }
+
+const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const InputKey = 'myUploader';
+
+//die() function calls replaced with trigger_error() calls
+//replace with structured exception handling
+    public static function uploadFile(string $username) {
+
+        if (empty($_FILES[self::InputKey])) {
+            //die("File Missing!");
+            trigger_error("File Missing!");
+        }
+
+        if ($_FILES[self::InputKey]['error'] > 0) {
+            trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
+        }
+
+
+        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+            trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
+        }
+//changed the $path location  - implfied it to only views/images/
+        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+        $path = "views/images/";
+        $destinationFile = $path . $username . '.jpeg';
+
+        if (!move_uploaded_file($tempFile, $destinationFile)) {
+            trigger_error("Handle Error");
+        }
+
+        //Clean up the temp file
+        if (file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+    }
     
     //maybe change the variable below to username rather than id
     public static function delete($id) {
