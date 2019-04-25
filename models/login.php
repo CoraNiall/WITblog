@@ -7,7 +7,7 @@
  */
 
 class Login {
-    public $id;
+    //public $id;
     public $username;
     public $email;
     public $password;
@@ -38,7 +38,7 @@ class Login {
     $req->execute(array('email' => $email,
                     'username' => $username));
     $user = $req->fetch();
-    if($user['email'] && ($user['username'])) {
+    if($user['email'] || ($user['username'])) {
         echo "Username or email is already registered. <br>Please try again or log in.<br>" ;
     } else {
         return false;
@@ -78,11 +78,11 @@ $req->execute();
             return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
             
         
-        // Validate credentials
+        // Validate credentials - do we need to uncomment this? atm, users can log in with any nonsense password
                 // }if (password_verify($_POST['password'], $user['password'])){
                                     
     }else{
-        throw new Exception('The email or passowrd is incorrect.');
+        throw new Exception('The email or password is incorrect.');
     }
     }
                         
@@ -95,18 +95,31 @@ $req->execute();
                                 
     }
     
-    public static function logout($id) {
+    public static function logout() {
         session_destroy();
         require_once('views/pages/home.php');
     }
     
-    public static function update($id) {
+      public static function getUser($username) {
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM user WHERE username=:username');
+        $req->execute(array('username'=>$username));
+        $user = $req->fetch();
+        
+        if($user) {
+            return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
+        } else {
+            throw new Exception('User not found.');
+        }
+    }
+    
+    public static function update($username) {
         $db = Db::getInstance();
-        $req = $db->prepare("Update user set email=:email, password=:password, username=:username, active=:active where ID=:id");
+        $req = $db->prepare("Update user set role_id=:role_id, email=:email, username=:username, password=:password where username=:username");
+        $req->bindParam(':role_id', $role);
         $req->bindParam(':email', $email);
-        $req->bindParam (':password', $password);
         $req->bindParam (':username', $username);
-        $req->bindParam (':active', $active);
+        $req->bindParam (':password', $password);
     
 // set parameters and execute
     if(isset($_POST['email'])&& $_POST['email']!=""){
@@ -118,12 +131,12 @@ $req->execute();
     if(isset($_POST['password'])&& $_POST['password']!=""){
         $filteredPassword = filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);
     }
+$role = '2';
 $email = $filteredEmail;
 $username = $filteredUsername;
 $password = $filteredPassword;
-$active = '1'; //default boolean value means account is active
 $req->execute();
-    }
+}
     
     //maybe change the variable below to username rather than id
     public static function delete($id) {

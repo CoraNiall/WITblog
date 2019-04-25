@@ -13,8 +13,7 @@ class LoginController {
         require_once('views/login/register.php');
     }
     else {
-        $user = Login::findUser($_POST['email']);
-        //go from here...    
+        $user = Login::findUser($_POST['email']);   
         if ($user['email'] && ($user['username'])) {
             return "The username or email is already regsitered.<br>";
         }
@@ -56,7 +55,7 @@ public function login(){
         
         if ($login){  
             Login::setSession($login);
-            require_once('views/pages/userProfile.php');
+            require_once('views/login/userProfile.php');
         //echo "<div class='alert alert-info'>";
         //echo "Successfully logged in.";
     //echo "</div>";
@@ -64,20 +63,40 @@ public function login(){
     }
 }
 
-public function getLogout() {
-    if($_SERVER['REQUEST_METHOD'] == 'GET') {
+public function logout() {
+    //if($_SERVER['REQUEST_METHOD'] == 'GET') {
         Login::logout();
-        require_once('views/pages/home.php');
+        require_once('views/login/logout.php');
+    }
+
+
+public function userProfile() {
+        if(!isset($_SESSION['username']))
+             return call('pages','error');
+    
+        try {
+         $user = Login::getUser($_SESSION['username']);
+
+        require_once('views/login/userProfile.php');
+    } 
+    catch (Exception $ex){
+        return call('pages','error');
     }
 }
 
 
-
 public function editProfile() {
-    if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        if(!isset($_GET['id']))
-        return call('pages', 'error');
-        Login::update();
+         if(!isset($_SESSION['username'])) {
+             return call('pages','error');
+         
+         $login = Login::getUser($_SESSION['username']);
+         
+         require_once('views/login/editProfile.php');
+    } else {
+        $login = $_SESSION['username'];
+        
+        Login::update($username);
+        require_once('views/login/userProfile.php');
     }
 }
 }
