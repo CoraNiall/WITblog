@@ -13,8 +13,8 @@ class PagesController {
       require_once('views/pages/error.php');
     }
      
-    public function userProfile(){
-        require_once ('views/pages/userProfile.php');
+    /*public function userProfile(){
+        require_once ('views/pages/userProfile.php');*/
         
     }
-}
+

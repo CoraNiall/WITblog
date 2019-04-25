@@ -15,7 +15,7 @@ class LoginController {
     else {
         $user = Login::findUser($_POST['email']);   
         if ($user['email'] && ($user['username'])) {
-            return "The username or email is already regsitered.<br>";
+            return "The username or email is already registered.<br>";
         }
         
         try {
@@ -86,16 +86,20 @@ public function userProfile() {
 
 
 public function editProfile() {
-         if(!isset($_SESSION['username'])) {
+    if($_SERVER['REQUEST_METHOD'] == 'GET') {
+         if(!isset($_SESSION['username'])) 
              return call('pages','error');
          
-         $login = Login::getUser($_SESSION['username']);
+         $user = Login::getUser($_SESSION['username']);
          
          require_once('views/login/editProfile.php');
-    } else {
-        $login = $_SESSION['username'];
-        
+        } 
+    else 
+        {
+        $username = $_SESSION['username'];
         Login::update($username);
+        
+        $user = Login::getUser($username);
         require_once('views/login/userProfile.php');
     }
 }

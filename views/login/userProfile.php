@@ -10,11 +10,11 @@
         ?>
         </div>
         <p>Your profile details:</p>
-        <p>Email: <?php echo $user->email; ?></p>
-        <p>Username: <?php echo $user->username; ?></p>
-        <p>Password: <?php echo $user->password; ?></p>
+        <p>Email:       <?php echo $user->email; ?></p>
+        <p>Username:    <?php echo $user->username; ?></p>
+        <p>Password:    <?php echo $user->password; ?></p>
         <?php 
-$file = 'views/images/profile' . $user->username . '.jpeg';
+$file = 'views/images/profiles' . $user->username . '.jpeg';
 if(file_exists($file)){
     $img = "<img src='$file' width='150' />";
     echo $img;
