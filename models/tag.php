@@ -49,7 +49,13 @@ class Tag {
         return $list;
     }
     
-
+public static function deleteTag($post_id) {
+    $db = Db::getInstance();
+        
+        $req = $db->prepare('delete FROM posttag WHERE post_id = :post_id');
+        // the query was prepared, now replace :id with the actual $id value
+        $req->execute(array('post_id' => $post_id));
+}
 
 
 }
