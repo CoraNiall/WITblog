@@ -59,7 +59,7 @@ session_start();
                             ?>
                             <ul class = "login menu">
                                 <?php //require_once('routes.php'); ?>
-                                <li><a href='?controller=login&action=Logout'>Logout</a></li>
+                                <li><a href='?controller=login&action=logout'>Logout</a></li>
                                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
                             </ul>
                             <?php
