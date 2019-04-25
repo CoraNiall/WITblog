@@ -38,23 +38,10 @@ public function login(){
         }  
     $username = $filteredUsername;
         $login= Login::login($username);
-          /*if($role->role_id==1) {
-             require_once('../views/pages/admin.php');  
-             echo "<div class='alert alert-info'>";
-             echo "Successfully logged in.";
-             echo "</div>";
-            } elseif ($role->role_id==2) {
-                require_once('../views/pages/userProfile.php');
-                echo "<div class='alert alert-info'>";
-                echo "Successfully logged in.";
-                echo "</div>";
-            }
-         else{
-                   $access_denied=true;
-            }*/
-        
+      
         if ($login){  
            $user = Login::setSession($login);
+           $user = Login::getUser($username);
             require_once('views/login/userProfile.php');
         //echo "<div class='alert alert-info'>";
         //echo "Successfully logged in.";
