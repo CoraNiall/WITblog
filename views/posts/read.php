@@ -1,4 +1,4 @@
-
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 
 
 
@@ -42,9 +42,10 @@ if ($post->comments):
 <?php endif; ?>
 
 <?php
+
 $file = 'views/images/' . $post->title . '.jpeg';
 if (file_exists($file)) {
-    $img = "<img src='$file' width='150' />";
+        $img = "<img src='$file' width='150' />";
     echo $img;
 } else {
     echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
