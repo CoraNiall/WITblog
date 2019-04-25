@@ -54,7 +54,7 @@ public function login(){
             }*/
         
         if ($login){  
-            Login::setSession($login);
+           $user = Login::setSession($login);
             require_once('views/login/userProfile.php');
         //echo "<div class='alert alert-info'>";
         //echo "Successfully logged in.";
