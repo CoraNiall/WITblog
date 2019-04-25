@@ -16,7 +16,11 @@
         $controller = 'pages';
         $action     = 'home';
   }
-
+    
+    
+    
+    require_once('models/tag.php');
+    $tags = Tag::all();
     require_once('views/layout.php');
         ?>
     </body>

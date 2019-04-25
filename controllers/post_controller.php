@@ -1,6 +1,19 @@
 <?php
 
 class PostController {
+    
+    public function search() {
+        // store the limited posts in a variable
+        $posts = Post::postSearch();
+        require_once('views/posts/readAll.php');
+    }
+    
+    public function searchTitle() {
+        // store the limited posts in a variable
+        $posts = Post::postSearchTitle();
+        require_once('views/posts/readAll.php');
+    }
+    
     public function readAll() {
       // we store all the posts in a variable
       $posts = Post::all();
@@ -27,13 +40,16 @@ class PostController {
       // if it's a GET request display a blank form for creating a new post
       // else it's a POST so add to the database and redirect to readAll action
       if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $tags = Tag::all();
           require_once('views/posts/create.php');
       }
       else { 
             Post::add();
              
             $posts = Post::all(); //$posts is used within the view
+
             require_once('views/posts/readAll.php');
+           
       }
       
     }

@@ -10,11 +10,26 @@
 
 </div>
 
-<div class="card">
-    <div class="card-body">
+<div>
+    <div>
         <p><?php echo $post->content; ?></p>
     </div>
 </div>
+
+<div>
+    <div>
+        <p><?php echo $post->location; ?></p>
+    </div>
+</div>
+
+<?php
+if ($post->tag):
+    foreach ($post->tag as $key => $value):
+        ?>
+        <p><?php echo $post->tag[$key]->tag; ?> </p>
+
+   <?php endforeach; ?>
+<?php endif; ?>
 
 
 <?php

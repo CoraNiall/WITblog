@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 <body>
     <div class="page-header">
         <?php

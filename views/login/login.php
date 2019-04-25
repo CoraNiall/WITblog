@@ -1,7 +1,7 @@
 
 <html>
-    <p>Login here!</p>
-<form action="" method="POST" class="w3-container" enctype="multipart/form-data">
+    <p>Login here</p>
+    <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     
     <h2>Fill in the following form to login:</h2>
     <p>
@@ -16,7 +16,7 @@
     </p>
         <p>
         <label>Password</label>
-        <input class="w3-input" type="text" name="password" required>
+        <input class="w3-input" type="password" name="password" required>
         
     </p>
        

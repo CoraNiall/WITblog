@@ -1,3 +1,4 @@
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 <p>Fill in the following form to update an existing post:</p>
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     <h2>Update Post</h2>
