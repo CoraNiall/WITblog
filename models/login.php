@@ -95,18 +95,17 @@ $req->execute();
                                 
     }
     
-    public static function logout($id) {
+    public static function logout() {
         session_destroy();
         require_once('views/pages/home.php');
     }
     
     public static function update($id) {
         $db = Db::getInstance();
-        $req = $db->prepare("Update user set email=:email, password=:password, username=:username, active=:active where ID=:id");
+        $req = $db->prepare("Update user set email=:email, password=:password, username=:username where ID=:id");
         $req->bindParam(':email', $email);
         $req->bindParam (':password', $password);
         $req->bindParam (':username', $username);
-        $req->bindParam (':active', $active);
     
 // set parameters and execute
     if(isset($_POST['email'])&& $_POST['email']!=""){
@@ -121,7 +120,6 @@ $req->execute();
 $email = $filteredEmail;
 $username = $filteredUsername;
 $password = $filteredPassword;
-$active = '1'; //default boolean value means account is active
 $req->execute();
     }
     
