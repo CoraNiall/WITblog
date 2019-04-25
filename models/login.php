@@ -135,7 +135,10 @@ $role = '2';
 $email = $filteredEmail;
 $username = $filteredUsername;
 $password = $filteredPassword;
-$req->execute(array('username'=>$username));
+$req->execute(array('username'=>$username,
+                    'email'=>$email,
+                    'password'=>$password,
+                    'role_id'=>$role));
         $user = $req->fetch();
         
         if($user) {
