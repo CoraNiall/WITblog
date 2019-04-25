@@ -12,16 +12,18 @@ class Post {
     public $comments;
     public $tag;
     public $location;
+    public $views;
 
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false) {
+    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false, $views = false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->comments = $comments;
         $this->tag = $tag;
         $this->location = $location;
+        $this->views = $views;
         //$this->userid = $userid;
     }
     
@@ -33,6 +35,25 @@ class Post {
         $post_id = $id;
 
         $req->execute();
+    }
+    
+    public static function getViews($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT COUNT(id) as total_views FROM view WHERE post_id=:post_id;");
+        $req->bindParam(':post_id', $post_id);
+        
+        $post_id = $id;
+        
+        $req->execute();
+        $list=[];
+        foreach ($req->fetchAll() as $view) {
+            array_push($list,$view);
+        }
+        
+        return $list[0][0];
+        
+       
+        
     }
     
     public static function postSearch() {
@@ -97,9 +118,10 @@ class Post {
 
         $comments = Comment::find($id);
         $tag = Tag::find($id);
+        $views = Post::getViews($id);
 
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location']);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location'],$views);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
