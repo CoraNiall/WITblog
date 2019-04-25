@@ -1,6 +1,19 @@
 <?php
 
 class PostController {
+    
+    public function search() {
+        // store the limited posts in a variable
+        $posts = Post::postSearch();
+        require_once('views/posts/readAll.php');
+    }
+    
+    public function searchTitle() {
+        // store the limited posts in a variable
+        $posts = Post::postSearchTitle();
+        require_once('views/posts/readAll.php');
+    }
+    
     public function readAll() {
       // we store all the posts in a variable
       $posts = Post::all();
