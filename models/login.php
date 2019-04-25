@@ -97,7 +97,6 @@ $req->execute();
     
     public static function logout() {
         session_destroy();
-        require_once('views/pages/home.php');
     }
     
       public static function getUser($username) {
