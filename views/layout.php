@@ -31,13 +31,8 @@ session_start();
                         <ul class="nav navbar-nav">
                             <li class="active"><a href='?controller=pages&action=home'>Home</a></li>
                             <li><a href='?controller=post&action=readAll'>All Posts</a></li>
-                            <?php
-                            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['role_id']==1){
-                            ?>
                             <li><a href='?controller=post&action=create'>Create Post</a></li>
-                            <?php
-                            }
-                            ?>
+                            <li> <a href="#">Search</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Authors <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -57,16 +52,15 @@ session_start();
                             <li><a href="#" class="fa fa-facebook"></a></li>
                             <li><a href="#" class="fa fa-twitter"></a></li>
                             <li><a href="#" class="fa fa-instagram"></a></li>
-                        </ul>
+                        
 
                         <?php
                         //check if user was logged in
                         //if so, show "Account" and "Logout" options
-                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && ($_SESSION['role_id'] == 2|| $_SESSION ['role'] == 1)) {
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && ($_SESSION['role_id'] == 2|| $_SESSION ['role_id'] == 1)) {
                             ?>
                             <li class ="active">
                             <ul class = "login menu">
-                                <?php //require_once('routes.php'); ?>
                                 <li><a href='?controller=login&action=logout'>Logout</a></li>
                                 <li><a href='?controller=login&action=userProfile'>Account</a></li>
                            
@@ -80,13 +74,7 @@ session_start();
                             <?php
                         }
                         ?>
-                               
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
                         </ul>
-                        
-                        
                     </div><!--/.nav-collapse -->
                 </div>
             </nav>
