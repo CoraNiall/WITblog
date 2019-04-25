@@ -14,7 +14,10 @@
 
 body { background-color: #fcf9f9;}
 .homepage{ font-family: lobster; font-size: 75px; padding-left: 75px;}
-
+.blog{
+    font-family: cursive;
+    text-align: center;
+}
 .pfphoto {
     border-radius: 50%;
     display: block;
