@@ -25,6 +25,16 @@ class Post {
         //$this->userid = $userid;
     }
     
+    public static function addView($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare("INSERT INTO view(post_id) VALUES(:post_id);");
+        $req->bindParam(':post_id', $post_id);
+        
+        $post_id = $id;
+
+        $req->execute();
+    }
+    
     public static function postSearch() {
         $list = [];
         $db = Db::getInstance();
@@ -58,6 +68,7 @@ class Post {
         return $list;
     }
     
+   
 
 
     /* This all() function prints out all of the blog posts, which then are printed in the readAll.php page (linked by post_controller.php) */
