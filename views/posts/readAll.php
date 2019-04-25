@@ -11,12 +11,12 @@
                 <center>  <h1 class="text-center"> <?php echo $post->title; ?> </h1> </center>
             </div>
             <center>
-                <p>
-                    <?php echo $post->content; ?> 
+                <p class="text">
+                    <?php echo substr($post->content, 0, 200) . "..."; ?> 
                     &nbsp;
                     &nbsp;
                     <br>
-                    <a href='?controller=post&action=read&id=<?php echo $post->id; ?>'>View post</a> &nbsp; &nbsp;
+                    <a class="w3-btn w3-pink" href='?controller=post&action=read&id=<?php echo $post->id; ?>'>View post</a> &nbsp; &nbsp;
                     <a href='?controller=post&action=delete&id=<?php echo $post->id; ?>'>Delete post</a> &nbsp; &nbsp;
                     <a href='?controller=post&action=update&id=<?php echo $post->id; ?>'>Update post</a> &nbsp;
                 </p>
