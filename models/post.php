@@ -223,10 +223,10 @@ class Post {
 //replace with structured exception handling
     public static function uploadFile(string $title) {
 
-        $errors = array();
+       $errors = array();
         $uploadedFiles = array();
         $extension = array("jpeg","jpg","png","gif");
-        $UploadFolder = "views/images/";                 //************//
+        $UploadFolder = "views/images/";                 
         
         $counter = 0;
  
@@ -281,40 +281,35 @@ class Post {
          
         echo count($uploadedFiles)." file(s) are successfully uploaded.";
     }                               
-}
-else{
-    echo "Please, Select file(s) to upload.";
-}
-                /* if (empty($_FILES["files"])) {
+    }}
+        /*if (empty($_FILES[self::InputKey])) {
                         //die("File Missing!");
                         trigger_error("File Missing!");
-                    }
+                }
 
-                    if ($_FILES["files"]['error'] > 0) {
-                        trigger_error("Handle the error! " . $_FILES["files"]['error']);
-                    }
+                if ($_FILES[self::InputKey]['error'] > 0) {
+                        trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
+                }
 
 
-                    if (!in_array($_FILES["files"]['type'], self::AllowedTypes)) {
-                        trigger_error("Handle File Type Not Allowed: " . $_FILES["files"]['type']);
-                    }
-                
-                
-//changed the $path location  - implfied it to only views/images/
-        foreach ($_FILES["files"]['tmp_name'] as $key=>$tmp_name){
-        $tempFile = $_FILES["files"]['tmp_name'][$key];
-        $path = "views/images/";
-        $destinationFile = $path . $title . '.jpeg';
-        }
-        if (!move_uploaded_file($tempFile, $destinationFile)) {
-            trigger_error("Handle Error");
-        }
+                if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                        trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
+                }
+        //changed the $path location  - implfied it to only views/images/
+                $tempFile = $_FILES[self::InputKey]['tmp_name'];
+                $path = "views/images/";
+                $destinationFile = $path . $title . '.jpeg';
 
-        //Clean up the temp file
-        if (file_exists($tempFile)) {
-            unlink($tempFile);
+                if (!move_uploaded_file($tempFile, $destinationFile)) {
+                        trigger_error("Handle Error");
+                }
+
+                //Clean up the temp file
+                if (file_exists($tempFile)) {
+                        unlink($tempFile); 
+                }
         }*/
-    }
+    
 
     /* The remove($id) function is used to remove blog posts, is used in readAll.php (linked by product_controller) */
     /* Once have started logins, should make accessible to only admins */
