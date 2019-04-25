@@ -1,5 +1,5 @@
 
-
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
 
 
@@ -37,8 +37,8 @@
                name="MAX_FILE_SIZE" 
                value="10000000"
                />
-
-        <input type="file" name="myUploader" class="w3-btn w3-pink" />
+        <label>Select Images to upload:</label>
+        <input type="file" name="files[]" multiple="multiple" class="w3-btn w3-pink" />
         <p>
             <br>
             <input class="w3-btn w3-pink" type="submit" value="Add Post">
