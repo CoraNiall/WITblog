@@ -1,4 +1,6 @@
 <html>
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+
     <p>Fill in the following form to register:</p>
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     
