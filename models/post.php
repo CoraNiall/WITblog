@@ -320,8 +320,18 @@ class Post {
         $id = intval($id);
         $req = $db->prepare('delete FROM post WHERE id = :id');
         // the query was prepared, now replace :id with the actual $id value
+        Tag::deleteTag($id);
+        Post::deleteViews($id);
         $req->execute(array('id' => $id));
     }
+    
+    public static function deleteViews($post_id) {
+    $db = Db::getInstance();
+        
+        $req = $db->prepare('delete FROM view WHERE post_id = :post_id');
+        // the query was prepared, now replace :id with the actual $id value
+        $req->execute(array('post_id' => $post_id));
+}
 
     public static function getLocationFromIP() {
         try {
