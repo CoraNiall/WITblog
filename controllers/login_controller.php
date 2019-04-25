@@ -64,7 +64,7 @@ public function login(){
     }
 }
 
-public function getLogout() {
+public function logout() {
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         Login::logout();
         require_once('views/pages/home.php');
