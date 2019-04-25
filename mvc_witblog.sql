@@ -73,6 +73,11 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+CREATE TABLE `view` (
+`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+`post_id` int(11) NOT NULL
+)
+ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 -- --------------------------------------------------------
@@ -208,6 +213,9 @@ ALTER TABLE `comment`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `comment_ibfk_2` (`post_id`);
 
+ALTER TABLE `view`
+  ADD KEY `post_id` (`post_id`);
+
 --
 -- Indexes for table `likes`
 --
@@ -314,6 +322,8 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON UPDATE CASCADE;
 
+ALTER TABLE `view`
+  ADD CONSTRAINT `view_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
 --
 -- Constraints for table `likes`
 --

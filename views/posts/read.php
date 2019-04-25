@@ -2,8 +2,6 @@
 
 
 
-
-
 <div class="text-center">
 
     <h1><p> <?php echo $post->title; ?></p> </h1>
@@ -19,6 +17,12 @@
 <div>
     <div>
         <p><?php echo $post->location; ?></p>
+    </div>
+</div>
+
+<div>
+    <div>
+        <p><?php echo $post->views; ?></p>
     </div>
 </div>
 

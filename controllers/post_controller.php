@@ -28,7 +28,9 @@ class PostController {
 
       try{
       // we use the given id to get the correct post
+         
       $post = Post::find($_GET['id']);
+      Post::addView($_GET['id']);
       require_once('views/posts/read.php');
       }
  catch (Exception $ex){
