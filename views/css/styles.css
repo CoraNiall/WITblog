@@ -12,7 +12,7 @@
 .footer-link a{color:#A9FD00; font-size:18px; text-transform:uppercase;}
 .dropdown:hover .dropdown-menu {display: block; color: #9999ff;}
 
-body { background-color: #fcf9f9;}
+body { background-color: lightgrey;}
 .homepage{ font-family: lobster; font-size: 75px; padding-left: 75px;}
 .blog{
     font-family: cursive;
