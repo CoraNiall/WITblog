@@ -21,7 +21,7 @@
         ?>
             
         </div>
-        <p>Your profile details:</p>
+        <p>Your account details:</p>
         <p>Email:       <?php echo $user->email; ?></p>
         <p>Username:    <?php echo $user->username; ?></p>
         <p>Password:    <?php echo $user->password; ?></p>
