@@ -20,8 +20,18 @@
         <p class="blog"><?php echo $post->content; ?></p>
     </div>
 </div>
-
 <div>
+        <?php
+        if ($post->comments):
+            foreach ($post->comments as $key => $value):
+                ?> 
+                <p><?php echo $post->comments[$key]->content; ?> </p>
+
+            <?php endforeach; ?>
+        <?php endif; ?>
+</div>
+        
+        <div>
     <div>
         <p><span class="glyphicon glyphicon-map-marker"><?php echo $post->location; ?></span></p>
     </div>
@@ -45,14 +55,7 @@ if ($post->tag):
 <?php endif; ?>
       
 
-<?php
-if ($post->comments):
-    foreach ($post->comments as $key => $value):
-        ?> 
-        <p><?php echo $post->comments[$key]->content; ?> </p>
 
-    <?php endforeach; ?>
-<?php endif; ?>
 
 <?php
 
