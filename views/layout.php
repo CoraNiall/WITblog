@@ -97,8 +97,6 @@ session_start();
 
                     <div class="well">
                         <form action="?controller=post&action=search" method="POST" enctype="multipart/form-data">
-
-
                             <center> <h2>Search for a post</h2> </center> <br>
 
                             <p> Select a tag to return related posts</p> <br>
