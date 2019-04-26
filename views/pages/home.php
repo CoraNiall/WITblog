@@ -43,7 +43,7 @@ $post = MostViewed()[0];?>
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="views/images/standard/CarouselOne.jpg" alt="Chania">
+            <img src="views/images/standard/CarouselsOne.jpg" alt="Chania">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
                 <p>Image number one!</p>
@@ -59,7 +59,7 @@ $post = MostViewed()[0];?>
         </div>
 
         <div class="item">
-            <img src="views/images/standard/CarouselThree.jpeg" alt="New York">
+            <img src="views/images/standard/CarouselFour.jpeg" alt="New York">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
                 <p>Image number three!</p>
