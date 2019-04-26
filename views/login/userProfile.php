@@ -5,9 +5,9 @@
     <div >
         
                 <?php 
-        $file = 'views/images/' . $user->username . '.jpeg';
+        $file = 'views/images/profiles/' . $user->username . '.jpeg';
         if(file_exists($file)){
-            $img = "<img src='$file' class='pfphoto' />";
+            $img = "<img src='$file' class='pfphoto' width='150' />";
             echo $img;
         }
         else

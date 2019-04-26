@@ -4,7 +4,7 @@
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     <h2>Update Profile</h2>
     <?php 
-$file = 'views/images/' . $user->username . '.jpeg';
+$file = 'views/images/profiles/' . $user->username . '.jpeg';
 if(file_exists($file)){
     $img = "<img src='$file' class='pfphoto' width='150' />";
     echo $img;

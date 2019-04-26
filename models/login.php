@@ -176,7 +176,7 @@ const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
         }
 //changed the $path location  - implfied it to only views/images/
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
-        $path = "views/images/";
+        $path = "views/images/profiles/";
         $destinationFile = $path . $username . '.jpeg';
 
         if (!move_uploaded_file($tempFile, $destinationFile)) {
