@@ -3,6 +3,7 @@
 <p>Fill in the following form to update your profile information:</p>
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     <h2>Update Profile</h2>
+    <div class='pfimage'>
     <?php 
 $file = 'views/images/profiles/' . $user->username . '.jpeg';
 if(file_exists($file)){
@@ -15,6 +16,7 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 }
 
 ?>
+    </div>
     <p>
         <label>Email</label>
         <input class="w3-input" type="text" name="email" value="<?= $user->email; ?>">
