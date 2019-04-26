@@ -1,10 +1,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+
 </head>
 
 
@@ -46,20 +48,24 @@
     </div>
 </div>
 
-  
+<div class="w3-container w3-padding">
       <h3 class="tags"> Tags:</h3>
+</div>
+       <div class="w3-container w3-white">
+           <p>
 <?php
 if ($post->tag):
     foreach ($post->tag as $key => $value):
         ?>
-      <a class="w3-btn w3-pink" name="tag" href='?controller=post&action=searchTags' method="GET" > <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
+      <a class="w3-tag w3-light-grey w3-small w3-margin-bottom" name="tag" href='?controller=post&action=searchTags' method="GET" > <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
 
    <?php endforeach; ?>
 <?php endif; ?>
-      
+           </p>  
+</div>
 
-
-
+<div>
+    <br>
 <?php
 
 $file = 'views/images/' . $post->title . '.jpeg';
@@ -71,7 +77,7 @@ if (file_exists($file)) {
 }
 ?>
 
-
+</div>
 
 <div class="row">
     <div class="col-lg-6">
