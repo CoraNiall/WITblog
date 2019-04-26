@@ -28,6 +28,7 @@ $controllers = array('pages' => ['home', 'error', 'userProfile'],
                     'post' => ['readAll','read','create','update','delete','search','searchTitle'],
                     'login' => ['admin', 'login', 'register', 'setSession', 'userProfile', 'editProfile', 'logout', 'deleteUser'],
                     'comment' => ['create', 'read', 'readAll', 'addComment'],
+                    'like'=> ['postlike', 'read']
                     );
 
   // check that the requested controller and action are both allowed

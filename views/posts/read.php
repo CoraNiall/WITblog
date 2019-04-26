@@ -37,6 +37,9 @@
     </div>
 </div>
 
+<p> <?php echo count($post->likes); ?> Likes </p>
+<a id="likebutton" class='btn btn-danger' href="?controller=like&action=postlike&id=<?php echo $post->id; ?>">❤</a> 
+
 <div>
     <div>
         <p><?php echo $post->views; ?> views!</p>
