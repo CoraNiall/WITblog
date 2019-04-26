@@ -3,8 +3,49 @@
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 
 <?php foreach ($posts as $post) { ?>
+<div class="w3-content" style="max-width:1400px">
 
 
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+      <?php
+
+$file = 'views/images/' . $post->title . '.jpeg';
+if (file_exists($file)) {
+        $img = "<img src='$file' style=width:'100%' />";
+    echo $img;
+} else {
+    echo "<img src='views/images/standard/_noproductimage.png' style=width:'100%' />";
+}
+?>
+    <div class="w3-container">
+      <h3><b><?php echo $post->title; ?> </b></h3>
+      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p><?php echo substr($post->content, 0, 200) . "..."; ?> 
+                    &nbsp;
+                    &nbsp;</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+           <a class="w3-btn w3-pink" href='?controller=post&action=read&id=<?php echo $post->id; ?>'>Read More</a> &nbsp; &nbsp;
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+<?php } ?>
+
+<?php foreach ($posts as $post) { ?>
     <section class="post-content-section">
             <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
 

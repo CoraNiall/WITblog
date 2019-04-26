@@ -1,10 +1,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </head>
+    <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+</head>
 
 
 
@@ -21,7 +22,7 @@
 </div>
 
 <div>
-    <div><svg viewBox="0 0 8 8"><use xlink:href="#location"></use></svg>
+    <div>
         <p><span class="glyphicon glyphicon-map-marker"><?php echo $post->location; ?></span></p>
     </div>
 </div>
@@ -32,18 +33,17 @@
     </div>
 </div>
 
-  <div>
-      <table class="tags"> Tags:
+  
+      <h3 class="tags"> Tags:</h3>
 <?php
 if ($post->tag):
     foreach ($post->tag as $key => $value):
         ?>
-        <p><?php echo $post->tag[$key]->tag; ?> </p>
+      <a class="w3-btn w3-pink" name="tag" href='?controller=post&action=searchTags' method="GET" > <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
 
    <?php endforeach; ?>
 <?php endif; ?>
-      </table>
-</div>
+      
 
 <?php
 if ($post->comments):

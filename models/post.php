@@ -56,13 +56,28 @@ class Post {
         
     }
     
+     public static function tagsSearch() {
+        $list = [];
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
+        $req->bindParam(':TAG_ID', $tagid);
+        
+        $tagid = $_GET['tag'];
+        $req->execute();
+        // we create a list of Post objects from the database results
+        foreach ($req->fetchAll() as $post) {
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+        }
+        return $list;
+    }
+    
     public static function postSearch() {
         $list = [];
         $db = Db::getInstance();
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
         
-        $tagid = $_POST['tag'];
+        $tagid = $_GET['tag'];
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
@@ -222,67 +237,8 @@ class Post {
 //die() function calls replaced with trigger_error() calls
 //replace with structured exception handling
     public static function uploadFile(string $title) {
-
-       $errors = array();
-        $uploadedFiles = array();
-        $extension = array("jpeg","jpg","png","gif");
-        $UploadFolder = "views/images/";                 
-        
-        $counter = 0;
- 
-        foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
-            $temp = $_FILES["files"]["tmp_name"][$key];
-            $name = $_FILES["files"]["name"][$key];
-
-            if(empty($temp))
-            {
-                break;
-            }
-
-            $counter++;
-            $UploadOk = true;
-            $ext = pathinfo($name, PATHINFO_EXTENSION);
-            if(in_array($ext, $extension) == false){
-                $UploadOk = false;
-                array_push($errors, $name." is invalid file type.");
-            }
-
-            if(file_exists($UploadFolder."/".$name) == true){
-                $UploadOk = false;
-                array_push($errors, $name." file already exists.");
-            }
-
-            if($UploadOk == true){
-                move_uploaded_file($temp,$UploadFolder."/".$name);
-                array_push($uploadedFiles, $name);
-            }
-        }
-
-        if($counter>0){
-            if(count($errors)>0)
-        {
-        echo "<b>Errors:</b>";
-        echo "<br/><ul>";
-        foreach($errors as $error)
-        {
-            echo "<li>".$error."</li>";
-        }
-        echo "</ul><br/>";
-    }
-     
-    if(count($uploadedFiles)>0){
-        echo "<b>Uploaded Files:</b>";
-        echo "<br/><ul>";
-        foreach($uploadedFiles as $fileName)
-        {
-            echo "<li>".$fileName."</li>";
-        }
-        echo "</ul><br/>";
-         
-        echo count($uploadedFiles)." file(s) are successfully uploaded.";
-    }                               
-    }}
-        /*if (empty($_FILES[self::InputKey])) {
+                
+        if (empty($_FILES[self::InputKey])) {
                         //die("File Missing!");
                         trigger_error("File Missing!");
                 }
@@ -308,7 +264,7 @@ class Post {
                 if (file_exists($tempFile)) {
                         unlink($tempFile); 
                 }
-        }*/
+        }
     
 
     /* The remove($id) function is used to remove blog posts, is used in readAll.php (linked by product_controller) */

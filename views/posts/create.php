@@ -38,7 +38,10 @@
                value="10000000"
                />
         <label>Select Images to upload:</label>
-        <input type="file" name="files[]" multiple="multiple" class="w3-btn w3-pink" />
+        
+  <input type="file" name="myUploader" class="w3-btn w3-pink" />
+  <p>
+       <!-- <input type="file" name="files[]" multiple="multiple" class="w3-btn w3-pink" />  -->
         <p>
             <br>
             <input class="w3-btn w3-pink" type="submit" value="Add Post">
