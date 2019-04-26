@@ -20,7 +20,7 @@ class LoginController {
         
         try {
                 Login::create();
-                require_once('views/login/login.php');
+                require_once('views/pages/home.php');
         }catch (Exception $ex) {
             return call('pages','error');
         }

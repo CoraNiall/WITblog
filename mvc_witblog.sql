@@ -2,14 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 20, 2019 at 11:19 PM
+-- Host: 127.0.0.1
+-- Generation Time: Apr 26, 2019 at 10:33 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.0.33
-DROP DATABASE IF EXISTS mvc_witblog;
-CREATE DATABASE mvc_witblog;
-
-USE mvc_witblog;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,9 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `mvc_witblog`
 --
-DROP DATABASE IF EXISTS mvc_witblog;
-CREATE DATABASE IF NOT EXISTS mvc_witblog DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE mvc_witblog;
 
 -- --------------------------------------------------------
 
@@ -42,8 +35,6 @@ CREATE TABLE `comment` (
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 
 -- --------------------------------------------------------
 
@@ -73,12 +64,20 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
-CREATE TABLE `view` (
-`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-`post_id` int(11) NOT NULL
-)
-ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Dumping data for table `post`
+--
 
+INSERT INTO `post` (`id`, `content`, `user_id`, `title`, `post_date`, `location`) VALUES
+(8, '123456', 1, 'another title', '2019-04-14 11:56:46', 'NA'),
+(10, 'some more words go here', 1, 'some words', '2019-04-13 22:00:01', 'NA'),
+(11, 'here we go again', 1, 'once more', '2019-04-13 22:01:34', 'NA'),
+(12, 'this is more text', 1, 'this is a post', '2019-04-14 08:07:22', 'NA'),
+(13, 'the content goes here', 1, 'a title goes here', '2019-04-14 08:09:03', 'NA'),
+(14, 'This is where the content was', 1, 'This is another new post', '2019-04-14 11:42:24', 'NA'),
+(15, 'This is some more content', 1, 'THis is another new post', '2019-04-14 08:18:14', 'NA'),
+(16, 'some more content', 1, 'a new title', '2019-04-14 08:34:33', 'NA'),
+(17, 'so this is a new post', 1, 'it is sunday morning', '2019-04-14 08:41:13', 'NA'),
+(18, 'this is some content to test the newly named db', 1, 'this is a monday morning post', '2019-04-15 10:48:37', 'NA');
 
 -- --------------------------------------------------------
 
@@ -90,6 +89,23 @@ CREATE TABLE `posttag` (
   `post_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posttag`
+--
+
+INSERT INTO `posttag` (`post_id`, `tag_id`) VALUES
+(8, 1),
+(8, 3),
+(8, 5),
+(8, 15),
+(10, 4),
+(10, 7),
+(10, 9),
+(10, 11),
+(11, 14),
+(11, 4),
+(11, 3);
 
 -- --------------------------------------------------------
 
@@ -108,7 +124,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `roles`) VALUES
 (1, 'admin'),
-(2,'registered_user');
+(2, 'registered_user');
 
 -- --------------------------------------------------------
 
@@ -134,22 +150,9 @@ CREATE TABLE `tag` (
   `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
-INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `post_date`, `location`) VALUES
-(8, 'another title', '123456', 1, '2019-04-14 11:56:46', 'NA'),
-(10, 'some words', 'some more words go here', 1, '2019-04-13 22:00:01', 'NA'),
-(11, 'once more', 'here we go again', 1, '2019-04-13 22:01:34', 'NA'),
-(12, 'this is a post', 'this is more text', 1, '2019-04-14 08:07:22', 'NA'),
-(13, 'a title goes here', 'the content goes here', 1, '2019-04-14 08:09:03', 'NA'),
-(14, 'This is another new post', 'This is where the content was', 1, '2019-04-14 11:42:24', 'NA'),
-(15, 'THis is another new post', 'This is some more content', 1, '2019-04-14 08:18:14', 'NA'),
-(16, 'a new title', 'some more content', 1, '2019-04-14 08:34:33', 'NA'),
-(17, 'it is sunday morning', 'so this is a new post', 1, '2019-04-14 08:41:13', 'NA'),
-(18, 'this is a monday morning post', 'this is some content to test the newly named db', 1, '2019-04-15 10:48:37', 'NA');
-
-
-
+--
+-- Dumping data for table `tag`
+--
 
 INSERT INTO `tag` (`id`, `tag`) VALUES
 (1, 'Technology'),
@@ -168,19 +171,8 @@ INSERT INTO `tag` (`id`, `tag`) VALUES
 (14, 'Skills'),
 (15, 'Event');
 
+-- --------------------------------------------------------
 
-INSERT INTO `posttag` (`post_id`, `tag_id`) VALUES
-(8, 1),
-(8, 3),
-(8, 5),
-(8, 15),
-(10,4),
-(10,7),
-(10,9),
-(10,11),
-(11,14),
-(11,4),
-(11,3);
 --
 -- Table structure for table `user`
 --
@@ -198,8 +190,23 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `email`, `password`, `username`) VALUES
-(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura');
+(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura'),
+(2, 2, 'anotheremail@email.com', 'password2', 'reg_user'),
+(3, 1, 'email@email.com', 'password', 'admin_user'),
+(9, 2, 'thisemail@email.com', 'password', 'Newuser'),
+(11, 2, 'differentemail@email.com', 'password', 'DifferentUser'),
+(15, 2, 'cl.reiss@gmail.com', 'password', 'Caroline');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `view`
+--
+
+CREATE TABLE `view` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -212,9 +219,6 @@ ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `comment_ibfk_2` (`post_id`);
-
-ALTER TABLE `view`
-  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `likes`
@@ -266,6 +270,13 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
+-- Indexes for table `view`
+--
+ALTER TABLE `view`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -291,7 +302,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `session`
@@ -303,13 +314,19 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `view`
+--
+ALTER TABLE `view`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -322,8 +339,6 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON UPDATE CASCADE;
 
-ALTER TABLE `view`
-  ADD CONSTRAINT `view_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
 --
 -- Constraints for table `likes`
 --
@@ -342,7 +357,7 @@ ALTER TABLE `post`
 --
 ALTER TABLE `posttag`
   ADD CONSTRAINT `posttag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
-  ADD CONSTRAINT `posttag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`ID`);
+  ADD CONSTRAINT `posttag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`);
 
 --
 -- Constraints for table `session`
@@ -354,11 +369,14 @@ ALTER TABLE `session`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`ID`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
+
+--
+-- Constraints for table `view`
+--
+ALTER TABLE `view`
+  ADD CONSTRAINT `view_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
 COMMIT;
-
-
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
