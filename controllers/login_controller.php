@@ -64,7 +64,7 @@ public function userProfile() {
     
         try {
          $user = Login::getUser($_SESSION['username']);
-
+        
         require_once('views/login/userProfile.php');
     } 
     catch (Exception $ex){
@@ -91,4 +91,10 @@ public function editProfile() {
         require_once('views/login/userProfile.php');
     }
 }
+
+ public function deleteUser() {
+     $username = $_SESSION['username'];
+     Login::delete($username);
+     require_once('views/pages/home.php');
+ }
 }

@@ -35,4 +35,7 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
   <p>
     <input class="w3-btn w3-gray" type="submit" value="Update Profile">
     </p>
+    <p>
+        <a href='?controller=login&action=deleteUser' class="btn btn-warning">Delete your Profile</a>
+    </p>
 </form>

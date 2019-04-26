@@ -7,14 +7,14 @@
  */
 
 class Login {
-    //public $id;
+    public $id;
     public $username;
     public $email;
     public $password;
     public $role_id;
     
-    public function __construct($username, $email, $password, $role) {
-        //$this->id = $id;
+    public function __construct($id, $username, $email, $password, $role) {
+        $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -45,9 +45,23 @@ class Login {
     }
     }
     
+    public static function getUser($username) {
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM user WHERE username =:username');
+        $req->execute(array('username'=>$username));
+        $user = $req->fetch();
+        
+        if($user) {
+            return new Login($user['id'],$user['username'], $user['email'], $user['password'], $user['role_id']);
+        } else {
+            throw new Exception('User not found.');
+        }
+    }
+    
     public static function create() {
         $db = Db::getInstance();
-        $req = $db->prepare("INSERT INTO user(role_id, email, password, username) VALUES (:role_id, :email, :password, :username)");
+        $req = $db->prepare("INSERT INTO user(id, role_id, email, password, username) VALUES (:id, :role_id, :email, :password, :username)");
+        $req->bindParam(':id', $id);
         $req->bindParam(':role_id', $role);
         $req->bindParam(':email', $email);
         $req->bindParam (':password', $password);
@@ -75,7 +89,7 @@ $req->execute();
         $req->execute(array('username'=>$username));
         $user = $req->fetch ();
         if ($user) {
-            return new Login($user['username'], $user['password'], $user['email'], $user['role_id']);
+            return new Login($user['id'], $user['username'], $user['password'], $user['email'], $user['role_id']);
             
         
         // Validate credentials - do we need to uncomment this? atm, users can log in with any nonsense password
@@ -99,18 +113,7 @@ $req->execute();
         session_destroy();
     }
     
-      public static function getUser($username) {
-        $db = DB::getInstance();
-        $req = $db->prepare('SELECT * FROM user WHERE username=:username');
-        $req->execute(array('username'=>$username));
-        $user = $req->fetch();
-        
-        if($user) {
-            return new Login($user['username'], $user['email'], $user['password'], $user['role_id']);
-        } else {
-            throw new Exception('User not found.');
-        }
-    }
+      
     
     public static function update($username) {
         $db = Db::getInstance();
@@ -189,12 +192,13 @@ const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
         }
     }
     
+    
     //maybe change the variable below to username rather than id
-    public static function delete($id) {
+    public static function delete($username) {
         $db = Db::getInstance();
       //make sure $id is an integer
-      $id = intval($id);
-      $req = $db->prepare('delete FROM user WHERE ID = :id');
+      //$id = intval($id);
+      $req = $db->prepare('delete FROM user WHERE username = :username');
       // the query was prepared, now replace :id with the actual $id value
       $req->execute(array('id' => $id));
     }
