@@ -2,6 +2,7 @@
 
 require_once('models/comment.php');
 require_once('models/tag.php');
+require_once('models/like.php');
 
 class Post {
 
@@ -13,10 +14,11 @@ class Post {
     public $tag;
     public $location;
     public $views;
+    public $likes;
 
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false, $views = false) {
+    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false, $views = false, $likes=false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
@@ -24,6 +26,7 @@ class Post {
         $this->tag = $tag;
         $this->location = $location;
         $this->views = $views;
+        $this->likes = $likes;
         //$this->userid = $userid;
     }
     
@@ -134,9 +137,10 @@ class Post {
         $comments = Comment::find($id);
         $tag = Tag::find($id);
         $views = Post::getViews($id);
+        $likes = Like::find($id);
 
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location'],$views);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location'],$views, $likes);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
