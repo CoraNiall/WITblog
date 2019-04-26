@@ -103,9 +103,9 @@ $req->execute();
     Public static function setSession($login){
         //login is verified, so start a new session
 
-                                 $_SESSION["loggedin"] = true;
-                                $_SESSION["username"] = $_POST ['username']; 
-                                $_SESSION["role_id"] = $login->role_id;
+                                 $_SESSION['loggedin'] = true;
+                                $_SESSION['username'] = $_POST ['username']; 
+                                $_SESSION['role_id'] = $login->role_id;
                                 
     }
     
@@ -194,12 +194,12 @@ const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     
     
     //maybe change the variable below to username rather than id
-    public static function delete($username) {
+    public static function delete($id) {
         $db = Db::getInstance();
       //make sure $id is an integer
-      //$id = intval($id);
-      $req = $db->prepare('delete FROM user WHERE username = :username');
+      $id = intval($id);
+      $req = $db->prepare("delete FROM user WHERE id = :id");
       // the query was prepared, now replace :id with the actual $id value
-      $req->execute(array('id' => $id));
+      $req->execute(array('id'=>$id));
     }
 }

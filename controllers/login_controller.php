@@ -93,8 +93,8 @@ public function editProfile() {
 }
 
  public function deleteUser() {
-     $username = $_SESSION['username'];
-     Login::delete($username);
-     require_once('views/pages/home.php');
- }
+            Login::delete($_GET['id']);
+            Login::logout();
+            require_once('views/login/logout.php');
+        } 
 }
