@@ -20,7 +20,7 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
     <div class='profile'>
     <p>
         <label>Email</label> &nbsp; &nbsp; &nbsp; &nbsp;
-        <input class="w3-input" type="text" name="email" value="<?= $user->email; ?>">
+        <input class="w3-input" type="text" name="email" placeholder="youremail@email.com" value="<?= $user->email; ?>">
     </p>
     <p>
         <label>Username</label>

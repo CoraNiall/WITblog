@@ -13,7 +13,7 @@
     </p>
     <p>
         <label>Email:</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-        <input class="email" type="text" name="email" required autofocus >
+        <input class="email" type="text" name="email" placeholder="youremail@email.com" required autofocus >
         
     </p>
         <p>
