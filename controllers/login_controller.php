@@ -37,7 +37,7 @@ public function login(){
         $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
         }  
     $username = $filteredUsername;
-        $login= Login::login($_POST['username'], $_POST['password']);
+        $login= Login::login($_POST['username'], $_POST['password'], $_POST['email']);
       
         if ($login){  
            Login::setSession($login);

@@ -80,10 +80,10 @@ $password = $filteredPassword;
 $req->execute();
     }
     
-    public static function login($username, $password) {
+    public static function login($username, $password, $email) {
         
         $db = DB::getInstance();
-        $req = $db->prepare("SELECT * from user WHERE username=:username AND password=:password");
+        $req = $db->prepare("SELECT * from user WHERE username=:username AND password=:password AND email=:email");
     
     if(isset($_POST['password'])&& $_POST['password']!="") {
         $filteredPassword = filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -91,14 +91,19 @@ $req->execute();
     if(isset($_POST['username'])&& $_POST['username']!="") {
         $filteredUsername = filter_input(INPUT_POST,'username', FILTER_SANITIZE_SPECIAL_CHARS);
     }
+    if(isset($_POST['email'])&& $_POST['email']!="") {
+        $filteredEmail = filter_input(INPUT_POST,'email', FILTER_SANITIZE_EMAIL);
+    }
     $username = $filteredUsername;
     $password = $filteredPassword;
+    $email = $filteredEmail;
         //$req->bindParam (':username', $username);
         $req->execute(array('username'=>$username,
-                            'password'=>$password));
+                            'password'=>$password,
+                            'email'=>$email));
         $user = $req->fetch ();
         if (!$user) {
-            die('User not found.');
+            die('User not found. Please check your credentials and try again.');
         } else {
             return new Login($user['id'], $user['username'], $user['password'], $user['email'], $user['role_id']);
         }
