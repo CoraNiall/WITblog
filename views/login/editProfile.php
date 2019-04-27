@@ -34,13 +34,14 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
   <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 
   <br/>
-  <input type="file" name="myUploader" class="w3-btn w3-pink" />
+  <label>Select a Profile Picture:</label>
+  <input type="file" name="myUploader" class="w3-btn w3-pink" value="Upload a Profile Picture" />
   <br/>
   <p>
-    <input class="w3-btn w3-gray" type="submit" value="Update Profile">
+    <input class="btn btn-warning" type="submit" value="Update Profile">
     </p>
     </div>
-    <p>
+    <p style='padding-left: 225px;'>
         <a href='?controller=login&action=deleteUser&id=<?php echo $user->id; ?>' class="btn btn-warning">Delete your Profile</a>
     </p>
 </form>

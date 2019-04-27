@@ -51,7 +51,7 @@ session_start();
                         </ul> 
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="./"> Topics <span class="sr-only">(current)</span></a></li>
+                            
                             <?php
                             //check if user was logged in
                             //if so, show "Account" and "Logout" options
