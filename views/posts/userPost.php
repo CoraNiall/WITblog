@@ -13,8 +13,7 @@
    
 <div class="text-center">
 
-<?php foreach($posts as $post) { ?>    
-<p> Post ID: <?php echo $post->id; ?></p>
+<?php foreach($posts as $post) { ?>   
 <h1><p> <?php echo $post->title; ?></p> </h1>
 <p>Content: <?php echo $post->content; ?></p>
 
