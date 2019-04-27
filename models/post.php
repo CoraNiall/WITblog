@@ -10,6 +10,7 @@ class Post {
     public $id;
     public $title;
     public $content;
+    public $post_date;
     public $comments;
     public $tag;
     public $location;
@@ -18,10 +19,11 @@ class Post {
 
     //public $userid;
 
-    public function __construct($id, $title, $content, $comments = false, $tag = false, $location = false, $views = false, $likes=false) {
+    public function __construct($id, $title, $content, $post_date = false, $comments = false, $tag = false, $location = false, $views = false, $likes=false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
+        $this->post_date = $post_date;
         $this->comments = $comments;
         $this->tag = $tag;
         $this->location = $location;
@@ -84,7 +86,7 @@ class Post {
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
         }
         return $list;
     }
@@ -102,7 +104,7 @@ class Post {
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
         }
         return $list;
     }
@@ -118,7 +120,7 @@ class Post {
         $req = $db->query('SELECT * FROM post');
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'], $post['post_date']);
         }
         return $list;
     }
@@ -147,7 +149,7 @@ class Post {
         
         
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $locationfiltered,$views, $likes);
+            return new Post($post['id'], $post['title'], $post['content'], $post['post_date'], $comments, $tag, $locationfiltered, $views, $likes);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
