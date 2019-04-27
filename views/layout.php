@@ -141,10 +141,14 @@ session_start();
                         </ul>
                     </div>
                     <div class="well">
-                        <center> <h2>About Author</h2> </center>
+                        <center> <h2>About  the Authors</h2> 
                         <img src="" class="img-rounded" />
-                        <p> </p>
-                        <center>    <a href="#" class="btn btn-default">Read more</a> </center>
+                        <p> Jessie -> </p>
+                        <p> Melanie -> </p>
+                        <p> Laura -> </p>
+                        <p> Tasha -> </p>
+                        <p> Caroline -> </p>
+                        </center>
                     </div>
                     <div class="list-group">
                         <a class="list-group-item active" href='?controller=post&action=searchTags&tag=2' method='GET' name='tag'> <h4 class="list-group-item-heading"> Women in Tech</h4> <p class="list-group-item-text"></p> </a>

@@ -343,7 +343,7 @@ class Post {
 
         foreach ($req->fetchAll() as $post) {
             if ($post) {
-            $list[] = new Post($post['user_id'], $post['id'], $post['title'],$post['content']); 
+            $list[] = new Post( $post['id'], $post['title'],$post['content']); 
             }
         }
 
