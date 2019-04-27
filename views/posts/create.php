@@ -39,7 +39,7 @@
                />
         <label>Select Images to upload:</label>
         
-  <input type="file" name="myUploader" class="w3-btn w3-pink" />
+  <input type="file" name="myUploader" class="w3-btn w3-pink" required="required" />
   <p>
        <!-- <input type="file" name="files[]" multiple="multiple" class="w3-btn w3-pink" />  -->
         <p>
