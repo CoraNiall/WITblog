@@ -18,6 +18,10 @@ body { background-color: #fcf9f9;}
     font-family: cursive;
     text-align: center;
 }
+
+.email{
+    padding-left: 5px;
+}
 a.btn.btn-warning {
     margin-top: 20px;
     background-color: #f0b14b;
