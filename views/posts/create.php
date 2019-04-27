@@ -1,5 +1,10 @@
-
+<head>
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
 
 
