@@ -26,7 +26,7 @@ class LoginController {
         try {
                 Login::create();
                 echo "<div class='alert alert-info'>";
-                 echo "Thanks for registering! Please Log in.";
+                 echo "Thanks for registering!";
                  echo "</div>";
                 require_once('views/login/userProfile.php');
                  
