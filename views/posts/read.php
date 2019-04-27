@@ -36,28 +36,23 @@ if (file_exists($file)) {
         <p class="blog"style="white-space: pre-line"><?php echo $post->content; ?></p>
     </div>
 </div>
-<div>
-        <?php
-        if ($post->comments):
-            foreach ($post->comments as $key => $value):
-                ?> 
-                <p><?php echo $post->comments[$key]->content; ?> </p>
-
-            <?php endforeach; ?>
-        <?php endif; ?>
-</div>
-        
+       
         <div>
     <div>
         <p><span class="glyphicon glyphicon-map-marker"> <?php echo " ". $post->location; ?></span></p>
     </div>
+            <div>
+                <p><span><?php echo $formattedDate = date("d F Y", strtotime($post->post_date));?></span></p>
+    </div>
 </div>
-
-<p> <?php echo count($post->likes); ?> Likes </p>
+<div>
 <a id="likebutton" class='btn btn-danger' href="?controller=like&action=postlike&id=<?php echo $post->id; ?>">❤</a> 
+    </div>
+
 
 <div>
     <div>
+        <p><?php echo count($post->likes); ?> Likes </p>
         <p><?php 
         if ($post->views == '0') {
                         echo "You are the first person to view this post";
@@ -71,7 +66,20 @@ if (file_exists($file)) {
         ?></p>
     </div>
 </div>
+<div class="w3-container w3-padding">
+      <h3 class="tags"> Comments:</h3>
+</div>
+<div>
+        <?php
+        if ($post->comments):
+            foreach ($post->comments as $key => $value):
+                ?> 
+                <p><?php echo $post->comments[$key]->content; ?> </p>
 
+            <?php endforeach; ?>
+        <?php endif; ?>
+</div>
+ 
 <div class="w3-container w3-padding">
       <h3 class="tags"> Tags:</h3>
 </div>
@@ -94,9 +102,9 @@ if ($post->tag):
     <div class="col-lg-6">
         <form class="form-horizontal" action="?controller=comment&action=addComment&id=<?php echo $post->id; ?>" method="POST">
             <div class="form-group">
-                <label class="col-lg-3 control-label">Comment</label>
+                
                 <div class="col-lg-9">
-                    <textarea class="form-control" rows="5" cols="10" name="content" placeholder="Comment here"></textarea>
+                    <textarea class="form-control" rows="5" cols="10" name="content" placeholder="Add comment here"></textarea>
                 </div>
             </div>
             <input type="submit" name="comment" value="Add Comment" class="btn btn-primary" >
