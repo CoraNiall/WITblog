@@ -21,7 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `mvc_witblog`
 --
-
+DROP DATABASE IF EXISTS mvc_witblog;
+CREATE DATABASE mvc_witblog;
+USE mvc_witblog;
 -- --------------------------------------------------------
 
 --
@@ -44,8 +46,7 @@ CREATE TABLE `comment` (
 
 CREATE TABLE `likes` (
   `id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `post_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -225,8 +226,7 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `post`
@@ -343,8 +343,7 @@ ALTER TABLE `comment`
 -- Constraints for table `likes`
 --
 ALTER TABLE `likes`
-  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
-  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`);
 
 --
 -- Constraints for table `post`

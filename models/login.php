@@ -103,9 +103,10 @@ $req->execute();
     Public static function setSession($login){
         //login is verified, so start a new session
 
-                                 $_SESSION['loggedin'] = true;
+                                $_SESSION['loggedin'] = true;
                                 $_SESSION['username'] = $_POST ['username']; 
                                 $_SESSION['role_id'] = $login->role_id;
+                                
                                 
     }
     
