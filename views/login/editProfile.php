@@ -28,7 +28,7 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
     </p>
     <p>
         <label>Password</label>
-        <input class="w3-input" type="text" name="password" value="<?= $user->password; ?>" >
+        <input class="w3-input" type="password" name="password" value="<?= $user->password; ?>" >
     </p>
             
   <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
