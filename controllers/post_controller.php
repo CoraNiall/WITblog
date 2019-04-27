@@ -2,6 +2,11 @@
 
 class PostController {
     
+    Public function searchTags () {
+        $posts = Post::tagsSearch();
+        require_once('views/posts/readAll.php');
+    }
+
     public function search() {
         // store the limited posts in a variable
         $posts = Post::postSearch();
