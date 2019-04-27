@@ -26,7 +26,7 @@
 
             <div class ="form-group">
                 <label for="sel2">Tags</label> <br>
-                <select name="tag[]" multiple="multiple" class="form-control" id="sel2">
+                <select name="tag[]" multiple="multiple" class="form-control" id="sel2" required="required">
                     <?php
                     foreach ($tags as $tag) {
                         echo "<option value=" . $tag->id . ">" . $tag->tag . "</option>";
@@ -44,7 +44,7 @@
                />
         <label>Select Images to upload:</label>
         
-  <input type="file" name="myUploader" class="w3-btn w3-pink" />
+  <input type="file" name="myUploader" class="w3-btn w3-pink" required="required" />
   <p>
        <!-- <input type="file" name="files[]" multiple="multiple" class="w3-btn w3-pink" />  -->
         <p>
