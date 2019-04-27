@@ -65,7 +65,7 @@ class Post {
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
         
-        $tagid = $_GET['tag'];
+        $tagid = $_POST['tag'];
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
@@ -80,7 +80,7 @@ class Post {
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
         
-        $tagid = $_GET['tag'];
+        $tagid = $_POST['tag'];
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {

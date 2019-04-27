@@ -1,6 +1,6 @@
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
 
-<p>Fill in the following form to update your profile information:</p>
+<h3>Fill in the following form to update your profile information:</h3>
 <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
     <h2>Update Profile</h2>
     <div class='pfimage'>
@@ -17,8 +17,9 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 
 ?>
     </div>
+    <div class='profile'>
     <p>
-        <label>Email</label>
+        <label>Email</label> &nbsp; &nbsp; &nbsp; &nbsp;
         <input class="w3-input" type="text" name="email" value="<?= $user->email; ?>">
     </p>
     <p>
@@ -34,9 +35,11 @@ echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 
   <br/>
   <input type="file" name="myUploader" class="w3-btn w3-pink" />
+  <br/>
   <p>
     <input class="w3-btn w3-gray" type="submit" value="Update Profile">
     </p>
+    </div>
     <p>
         <a href='?controller=login&action=deleteUser&id=<?php echo $user->id; ?>' class="btn btn-warning">Delete your Profile</a>
     </p>

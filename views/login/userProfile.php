@@ -25,6 +25,7 @@
             
        <div class='profile'> 
         <h3>Your profile details:</h3>
+        <br/>
         <p>Email:&nbsp;&nbsp;    <?php echo $user->email; ?></p>
         <p>Username:&nbsp;    <?php echo $user->username; ?></p>
         <p>Password:&nbsp;    <?php echo $user->password; ?></p>
