@@ -66,6 +66,8 @@ class Login {
         $req->bindParam(':email', $email);
         $req->bindParam (':password', $password);
         $req->bindParam (':username', $username);  
+        
+     
 // set parameters and execute
     if(isset($_POST['email'])&& $_POST['email']!="")
         {$filteredEmail = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);}
