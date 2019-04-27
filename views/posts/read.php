@@ -49,7 +49,7 @@ if (file_exists($file)) {
         
         <div>
     <div>
-        <p><span class="glyphicon glyphicon-map-marker"><?php echo $post->location; ?></span></p>
+        <p><span class="glyphicon glyphicon-map-marker"> <?php echo " ". $post->location; ?></span></p>
     </div>
 </div>
 
