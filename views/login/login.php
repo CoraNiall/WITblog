@@ -1,10 +1,16 @@
 
 <html>
     <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
-    <h3>Login here</h3>
     <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
-    
-    <h2>Fill in the following form to login:</h2>
+     <h2>
+        <?php if(isset($error)) {
+            echo "Login details are incorrect, please try again...";
+        } else {
+            echo "Fill in the following form to login:";
+        }
+        ?>
+    </h2>
+        
     <p>
         <label>Username</label> &nbsp; &nbsp; 
         <input class="w3-input" type="text" name="username" required autofocus>
