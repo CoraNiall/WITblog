@@ -82,24 +82,28 @@ $password = $filteredPassword;
 $req->execute();
     }
     
-    public static function login($username) {
-        $list = [];
-        $db = DB::getInstance();
-        $req = $db->prepare("SELECT * from user WHERE username=:username");
-
-        //$req->bindParam (':username', $username);
-        $req->execute(array('username'=>$username));
-        $user = $req->fetch ();
-        if ($user) {
-            return new Login($user['id'], $user['username'], $user['password'], $user['email'], $user['role_id']);
-            
+    public static function login($username, $password) {
         
-        // Validate credentials - do we need to uncomment this? atm, users can log in with any nonsense password
-                // }if (password_verify($_POST['password'], $user['password'])){
-                                    
-    }else{
-        throw new Exception('The email or password is incorrect.');
+        $db = DB::getInstance();
+        $req = $db->prepare("SELECT * from user WHERE username=:username AND password=:password");
+    
+    if(isset($_POST['password'])&& $_POST['password']!="") {
+        $filteredPassword = filter_input(INPUT_POST,'password', FILTER_SANITIZE_SPECIAL_CHARS);
     }
+    if(isset($_POST['username'])&& $_POST['username']!="") {
+        $filteredUsername = filter_input(INPUT_POST,'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+    $username = $filteredUsername;
+    $password = $filteredPassword;
+        //$req->bindParam (':username', $username);
+        $req->execute(array('username'=>$username,
+                            'password'=>$password));
+        $user = $req->fetch ();
+        if (!$user) {
+            die('User not found.');
+        } else {
+            return new Login($user['id'], $user['username'], $user['password'], $user['email'], $user['role_id']);
+        }
     }
                         
     Public static function setSession($login){
