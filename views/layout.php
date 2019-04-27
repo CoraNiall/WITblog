@@ -68,9 +68,9 @@ session_start();
                                 <?php
                             }
                             ?>
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-instagram"></a></li>
+                            <li><a href="https://www.facebook.com/Women-in-Tech-405416833371860/?view_public_for=405416833371860" class="fa fa-facebook"></a></li>
+                            <li><a href="https://twitter.com/blog_wit" class="fa fa-twitter"></a></li>
+                            <li><a href="https://www.instagram.com/wit_blog/" class="fa fa-instagram"></a></li>
                       
                         </ul>
                     </div><!--/.nav-collapse -->
