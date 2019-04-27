@@ -208,12 +208,13 @@ class Post {
         Post::uploadFile($title);
 
 //upload multiple tags
+        if(isset($_POST['tag'])) {
         $tag = $_POST['tag'];
 
         foreach ($tag as $value) {
             Post::addTag($value);
         }
-        
+        }   
 
     }
 

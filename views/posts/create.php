@@ -21,7 +21,7 @@
 
             <div class ="form-group">
                 <label for="sel2">Tags</label> <br>
-                <select name="tag[]" multiple="multiple" class="form-control" id="sel2">
+                <select name="tag[]" multiple="multiple" class="form-control" id="sel2" required="required">
                     <?php
                     foreach ($tags as $tag) {
                         echo "<option value=" . $tag->id . ">" . $tag->tag . "</option>";
