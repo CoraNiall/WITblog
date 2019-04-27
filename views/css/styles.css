@@ -13,7 +13,7 @@
 .dropdown:hover .dropdown-menu {display: block; color: #9999ff;}
 
 body { background-color: #fcf9f9;}
-.homepage{ font-family: lobster; font-size: 75px; padding-left: 75px;}
+.homepage{ font-family: lobster; font-size: 75px; padding-left: 75px; text-align: center;}
 .blog{
     font-family: cursive;
     text-align: center;

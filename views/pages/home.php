@@ -15,20 +15,17 @@ $post = MostViewed()[0];?>
 <div class="homepage">
 
     <p> Welcome to our blog <p>
-
-
-
-</div>
-
-<div>
-    <p>Hello <?php
+    <p> <?php
         if (!empty($_SESSION)) {
             echo $_SESSION['username'];
         } else {
             echo"Guest";
         }
-        ?>!<p>
+        ?>!</p>
+
+
 </div>
+
 
 
 <div>
@@ -51,7 +48,7 @@ $post = MostViewed()[0];?>
         </div>
 
         <div class="item">
-            <img src="views/images/standard/CarouselTwo.jpg" alt="Chicago">
+            <img src="views/images/standard/Carousel2.jpg" alt="Chicago">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
                 <p>Image number two!</p>
@@ -80,7 +77,7 @@ $post = MostViewed()[0];?>
 </div>
 
 
-<div class="mx-auto bg-warning" style="width:850px">
+<div class="mx-auto bg-warning" style="width:850px; text-align: center">
 <div class="panel panel-default">
 
     <h3>Currently, the most viewed post is...</h3>
