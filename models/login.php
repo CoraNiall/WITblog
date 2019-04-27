@@ -95,8 +95,6 @@ $req->execute();
         // Validate credentials - do we need to uncomment this? atm, users can log in with any nonsense password
                 // }if (password_verify($_POST['password'], $user['password'])){
                                     
-    }else{
-        throw new Exception('The email or password is incorrect.');
     }
     }
                         
