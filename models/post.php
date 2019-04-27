@@ -138,9 +138,13 @@ class Post {
         $tag = Tag::find($id);
         $views = Post::getViews($id);
         $likes = Like::find($id);
-
+        
+        if ($post['location'] == 'NA' || $post['location'] == 'N/A' || $post['location'] == 'unknown') {
+            $locationfiltered = 'Unknown location';
+        }
+        
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $post['location'],$views, $likes);
+            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $locationfiltered,$views, $likes);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');
@@ -208,12 +212,13 @@ class Post {
         Post::uploadFile($title);
 
 //upload multiple tags
+        if(isset($_POST['tag'])) {
         $tag = $_POST['tag'];
 
         foreach ($tag as $value) {
             Post::addTag($value);
         }
-        
+        }   
 
     }
 
@@ -255,6 +260,7 @@ class Post {
                 if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
                         trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
                 }
+                
         //changed the $path location  - implfied it to only views/images/
                 $tempFile = $_FILES[self::InputKey]['tmp_name'];
                 $path = "views/images/";
