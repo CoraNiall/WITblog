@@ -17,10 +17,19 @@ class LoginController {
         if ($user['email'] && ($user['username'])) {
             return "The username or email is already registered.<br>";
         }
+         $validEmail = $_POST['email'];  
+        if (!filter_var($validEmail, FILTER_VALIDATE_EMAIL)) {
+          return "Invalid email format";
+            call('pages', 'error');
+        }
         
         try {
                 Login::create();
-                require_once('views/pages/home.php');
+                echo "<div class='alert alert-info'>";
+                 echo "Thanks for registering! Please Log in.";
+                 echo "</div>";
+                require_once('views/login/login.php');
+                 
         }catch (Exception $ex) {
             return call('pages','error');
         }
