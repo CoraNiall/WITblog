@@ -30,8 +30,8 @@
         <p>Username:&nbsp;    <?php echo $user->username; ?></p>
         <p>Password:&nbsp;    <?php echo $user->password; ?></p>
        </div>
-    <p>
-        <a href='?controller=login&action=editProfile' class="btn btn-warning">Edit your Profile</a>
+    <p style='padding-left: 225px;'>
+        <a href='?controller=login&action=editProfile' class="btn btn-warning" >Edit your Profile</a>
         <!--<a href='?controller=login&action=logout' class="btn btn-danger">Sign Out of Your Account</a>-->
     </p>
 </body>
