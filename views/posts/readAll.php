@@ -25,7 +25,7 @@ if (file_exists($file)) {
 ?>
     <div class="w3-container">
       <h3><b><?php echo $post->title; ?> </b></h3>
-      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+      <h5>Title description, <span class="w3-opacity"><?php echo $post->post_date;?></span></h5>
     </div>
 
     <div class="w3-container">
