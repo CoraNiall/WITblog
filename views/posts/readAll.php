@@ -25,7 +25,7 @@ if (file_exists($file)) {
 ?>
     <div class="w3-container">
       <h3><b><?php echo $post->title; ?> </b></h3>
-      <h5>Title description, <span class="w3-opacity"><?php echo $post->post_date;?></span></h5>
+      <h5>Title description, <span class="w3-opacity"><?php echo $formattedDate = date("d F Y", strtotime($post->post_date));?></span></h5>
 
     </div>
 
