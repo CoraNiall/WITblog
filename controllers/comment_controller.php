@@ -10,7 +10,12 @@ class commentController {
     }
         $content = $filteredContent;
         $post_id = intval($_GET['id']);
-         Comment::add($post_id, $content);
+        if(isset($_SESSION['username'])&& $_SESSION['username']!=""){
+            $username = $_SESSION['username'];
+        }   else{
+            $username = "Guest";    
+            }
+         Comment::add($post_id, $content, $username);
          Comment::showpost();
     }
     

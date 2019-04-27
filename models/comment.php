@@ -25,29 +25,21 @@ class Comment {
     
     
     //This add() function is used to add a comment and is used in posts/read.php (linked by comment_controller.php)
-    //Need to figure out how to autofill user_id, maybe when have sorted out login?
-    //For now ADDED user_id into the function and hardcoded the result to marry with our ADMIN user on PK 1 in the database
-    //For now hardcoded a $post_id for a post in my database until we work out how to attach post_id   
-    public static function add($post_id, $content) {
-//tried to include post_id through GET id in addComment method in commentController - URL now showing controller=comment&action=addComment&id=postid
+    //Gets post_id from GET request, and username from SESSION 
+ public static function add($post_id, $content, $username) {
+            
         $db = Db::getInstance();
-        //$post_id = intval($id);
-        $req = $db->prepare("INSERT INTO comment(content, date_time, user_id, post_id) values (:content, NOW(), :userid, :postid)");
+        /*$req = $db->prepare("SELECT ID FROM user WHERE username=:username");
+        $req->bindParam(':username', $username);
+        $req->execute();*/
+        
+        $req = $db->prepare("INSERT INTO comment(content, date_time, user_id, post_id) values (:content, NOW(), (SELECT id FROM user WHERE username=:username), :postid)");
         $req->bindParam(':content', $content);
-        $req->bindParam(':userid', $user_id);
+        $req->bindParam(':username', $username);
         $req->bindParam(':postid', $post_id);
-
-
-
-
-        $user_id = 1;
-        //$post_id = 25;
-
         $req->execute();
-   
+  
     }
-
-    
     
     
 // This amended find() function prints out all of the comments where post_id = :id, and loops through them.
