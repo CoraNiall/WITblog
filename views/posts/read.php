@@ -68,13 +68,15 @@ if (file_exists($file)) {
        <div class="w3-container w3-white">
            <p>
 <?php
+
 if ($post->tag):
     foreach ($post->tag as $key => $value):
         ?>
-      <a class="w3-tag w3-light-grey w3-small w3-margin-bottom" name="tag" href='?controller=post&action=search' method="POST" id="sel2"> <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
-
+               <a class="w3-tag w3-light-grey w3-small w3-margin-bottom" name="tag" href='?controller=post&action=searchTags&tag= <?php echo $post->tag[$key]->id;?>' method="GET" > <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
+           
    <?php endforeach; ?>
-<?php endif; ?>
+<?php endif; 
+?>
            </p>  
 </div>
 

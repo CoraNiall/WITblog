@@ -59,20 +59,20 @@ class Post {
         
     }
     
-     public static function tagsSearch() {
+     public static function tagsSearch($tagid) {
         $list = [];
         $db = Db::getInstance();
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
         
-        $tagid = $_POST['tag'];
-        $req->execute();
+        $req->execute(array ('TAG_ID'=>$tagid));
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
             $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
         }
         return $list;
     }
+    
     
     public static function postSearch() {
         $list = [];

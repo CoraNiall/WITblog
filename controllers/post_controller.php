@@ -3,7 +3,8 @@
 class PostController {
     
     Public function searchTags () {
-        $posts = Post::tagsSearch();
+       $tagid = $_GET['tag'];
+        $posts = Post::tagsSearch($tagid);
         require_once('views/posts/readAll.php');
     }
 

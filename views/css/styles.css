@@ -23,7 +23,9 @@ a.btn.btn-warning {
     margin-left: 200px;
     background-color: #f0b14b;
 }
-
+img.postimage{
+    align-content: center;
+}
 img.pfphoto {
     border-radius: 50%;
     display: block;
