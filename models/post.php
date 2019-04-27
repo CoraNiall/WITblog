@@ -142,6 +142,9 @@ class Post {
         if ($post['location'] == 'NA' || $post['location'] == 'N/A' || $post['location'] == 'unknown') {
             $locationfiltered = 'Unknown location';
         }
+        else {$locationfiltered = $post['location'];
+        }
+        
         
         if ($post) {
             return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $locationfiltered,$views, $likes);
