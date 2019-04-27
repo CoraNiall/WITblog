@@ -86,7 +86,7 @@ class Post {
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
         }
         return $list;
     }
@@ -104,7 +104,7 @@ class Post {
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
         }
         return $list;
     }
@@ -149,7 +149,7 @@ class Post {
         
         
         if ($post) {
-            return new Post($post['id'], $post['title'], $post['content'], $comments, $tag, $locationfiltered,$views, $likes);
+            return new Post($post['id'], $post['title'], $post['content'], $post['post_date'], $comments, $tag, $locationfiltered, $views, $likes);
         } else {
             //replace with a more meaningful exception
             throw new Exception('The requested post could not be found.');

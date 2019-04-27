@@ -58,7 +58,17 @@ if (file_exists($file)) {
 
 <div>
     <div>
-        <p><?php echo $post->views; ?> views!</p>
+        <p><?php 
+        if ($post->views == '0') {
+                        echo "You are the first person to view this post";
+                    }
+                    else if ($post->views == '1') {
+                        echo $post->views . " view";
+                    }
+                    else {
+                        echo $post->views . " views";
+                    }
+        ?></p>
     </div>
 </div>
 

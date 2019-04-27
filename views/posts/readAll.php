@@ -26,6 +26,7 @@ if (file_exists($file)) {
     <div class="w3-container">
       <h3><b><?php echo $post->title; ?> </b></h3>
       <h5>Title description, <span class="w3-opacity"><?php echo $post->post_date;?></span></h5>
+
     </div>
 
     <div class="w3-container">
@@ -46,7 +47,7 @@ if (file_exists($file)) {
 <?php } ?>
 
 <?php foreach ($posts as $post) { ?>
-    <section class="post-content-section">
+    <!--<section class="post-content-section">
             <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
 
                 <center>  <h1 class="text-center"> <?php echo $post->title; ?> </h1> </center>
@@ -62,7 +63,7 @@ if (file_exists($file)) {
                     <a href='?controller=post&action=update&id=<?php echo $post->id; ?>'>Update post</a> &nbsp;
                 </p>
             </center>
-    </section>       
+    </section>      --> 
 <?php } ?>
 
 
