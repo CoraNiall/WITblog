@@ -16,10 +16,24 @@
     <h1><p> <?php echo $post->title; ?></p> </h1>
 
 </div>
+<div class="postimage">
+    <br>
+<?php
+
+$file = 'views/images/' . $post->title . '.jpeg';
+if (file_exists($file)) {
+        $img = "<img src='$file' width='150' />";
+    echo $img;
+} else {
+    echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
+}
+?>
+
+</div>
 
 <div>
     <div>
-        <p class="blog"><?php echo $post->content; ?></p>
+        <p class="blog"style="white-space: pre-line"><?php echo $post->content; ?></p>
     </div>
 </div>
 <div>
@@ -57,26 +71,11 @@
 if ($post->tag):
     foreach ($post->tag as $key => $value):
         ?>
-      <a class="w3-tag w3-light-grey w3-small w3-margin-bottom" name="tag" href='?controller=post&action=searchTags' method="GET" > <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
+      <a class="w3-tag w3-light-grey w3-small w3-margin-bottom" name="tag" href='?controller=post&action=search' method="POST" id="sel2"> <?php echo $post->tag[$key]->tag;?><br></a> &nbsp; &nbsp;
 
    <?php endforeach; ?>
 <?php endif; ?>
            </p>  
-</div>
-
-<div>
-    <br>
-<?php
-
-$file = 'views/images/' . $post->title . '.jpeg';
-if (file_exists($file)) {
-        $img = "<img src='$file' width='150' />";
-    echo $img;
-} else {
-    echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
-}
-?>
-
 </div>
 
 <div class="row">
