@@ -331,6 +331,28 @@ class Post {
         }
     }
 
+    public static function userpost ($user_id) {
+        $list = [];
+        $db = Db::getInstance();
+        //use intval to make sure $id is an integer
+        $user_id = intval($user_id);
+        $req = $db->prepare('SELECT * FROM post WHERE user_id = :user_id');
+        //the query was prepared, now replace :id with the actual $id value
+        $req->execute(array('user_id' => $user_id));
+        // we create a list of Post objects from the database results
+
+        foreach ($req->fetchAll() as $post) {
+            if ($post) {
+            $list[] = new Post($post['user_id'], $post['id'], $post['title'],$post['content']); 
+            }
+        }
+
+        if ($list) {
+            return $list;
+        }
+    }
+    
+    
 }
 ?>
 
