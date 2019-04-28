@@ -171,7 +171,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `email`, `password`, `username`) VALUES
-(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura');
+(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura'),
+(2,3, 'jessieguest@email.com','passyword','Guest');
 
 -- --------------------------------------------------------
 
