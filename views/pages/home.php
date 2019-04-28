@@ -41,7 +41,7 @@ $post = MostViewed()[0];?>
             <img src="views/images/standard/CarouselsOne.jpg" alt="Chania">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
-                <p>Image number one!</p>
+                <p>2019 Cohort</p>
             </div>
         </div>
 
@@ -49,7 +49,7 @@ $post = MostViewed()[0];?>
             <img src="views/images/standard/Carousel2.jpg" alt="Chicago">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
-                <p>Image number two!</p>
+                <p>Team TLC</p>
             </div>
         </div>
 
@@ -57,7 +57,7 @@ $post = MostViewed()[0];?>
             <img src="views/images/standard/CarouselFour.jpeg" alt="New York">
             <div class="carousel-caption">
                 <h3>Women in Tech</h3>
-                <p>Image number three!</p>
+                <p>Renee and the 2019 Get Into Techers</p>
             </div>
         </div>
     </div>
@@ -97,8 +97,8 @@ $post = MostViewed()[0];?>
   <div class="w3-card-4 w3-margin w3-white">
     <img src="/w3images/woods.jpg" alt="Nature" style="width:100%">
     <div class="w3-container">
-      <h3><b>TITLE HEADING</b></h3>
-      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+        <p class="blogHeading"><b>TITLE HEADING</b>
+        <h5><span class="w3-opacity">April 7, 2014</span></h5></p>
     </div>
 
     <div class="w3-container">
@@ -126,8 +126,8 @@ HODOR HODOR! Hodor?
   <div class="w3-card-4 w3-margin w3-white">
   <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%">
     <div class="w3-container">
-      <h3><b>BLOG ENTRY</b></h3>
-      <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5>
+       <p class="blogHeading"><b>TITLE HEADING</b>
+      <h5><span class="w3-opacity">April 2, 2014</span></h5>
     </div>
 
     <div class="w3-container">

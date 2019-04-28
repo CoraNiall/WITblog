@@ -12,6 +12,17 @@
 .footer-link a{color:#A9FD00; font-size:18px; text-transform:uppercase;}
 .dropdown:hover .dropdown-menu {display: block; color: #9999ff;}
 
+.w3-row{
+    font-family: "Raleway", sans-serif;
+}
+
+.blogHeading{
+    font-family: "Raleway", sans-serif;
+}
+
+.list-group-item-heading{
+   font-family: "Raleway", sans-serif; 
+}
 body { background-color: #fcf9f9;}
 .homepage{ font-family: lobster; font-size: 75px; padding-left: 75px; text-align: center;}
 .blog{
