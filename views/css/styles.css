@@ -48,8 +48,9 @@ img.pfphoto {
   overflow: hidden;
   border-radius: 50%;
 }
-.w3-input{
-    
+.w3-card-4 w3-margin w3-white{
+    background-image: url("views/images/Hodor.jpeg");
+    width: 100%;
 }
 
 .pfimage {

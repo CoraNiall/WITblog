@@ -36,9 +36,6 @@ if (file_exists($file)) {
       <div class="w3-row">
         <div class="w3-col m8 s12">
            <a class="w3-btn w3-pink" href='?controller=post&action=read&id=<?php echo $post->id; ?>'>Read More</a> &nbsp; &nbsp;
-        <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
-        </div>
       </div>
     </div>
   </div>
