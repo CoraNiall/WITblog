@@ -68,17 +68,7 @@ CREATE TABLE `post` (
 -- Dumping data for table `post`
 --
 
-INSERT INTO `post` (`id`, `content`, `user_id`, `title`, `post_date`, `location`) VALUES
-(8, '123456', 1, 'another title', '2019-04-14 11:56:46', 'NA'),
-(10, 'some more words go here', 1, 'some words', '2019-04-13 22:00:01', 'NA'),
-(11, 'here we go again', 1, 'once more', '2019-04-13 22:01:34', 'NA'),
-(12, 'this is more text', 1, 'this is a post', '2019-04-14 08:07:22', 'NA'),
-(13, 'the content goes here', 1, 'a title goes here', '2019-04-14 08:09:03', 'NA'),
-(14, 'This is where the content was', 1, 'This is another new post', '2019-04-14 11:42:24', 'NA'),
-(15, 'This is some more content', 1, 'THis is another new post', '2019-04-14 08:18:14', 'NA'),
-(16, 'some more content', 1, 'a new title', '2019-04-14 08:34:33', 'NA'),
-(17, 'so this is a new post', 1, 'it is sunday morning', '2019-04-14 08:41:13', 'NA'),
-(18, 'this is some content to test the newly named db', 1, 'this is a monday morning post', '2019-04-15 10:48:37', 'NA');
+
 
 -- --------------------------------------------------------
 
@@ -95,18 +85,7 @@ CREATE TABLE `posttag` (
 -- Dumping data for table `posttag`
 --
 
-INSERT INTO `posttag` (`post_id`, `tag_id`) VALUES
-(8, 1),
-(8, 3),
-(8, 5),
-(8, 15),
-(10, 4),
-(10, 7),
-(10, 9),
-(10, 11),
-(11, 14),
-(11, 4),
-(11, 3);
+
 
 -- --------------------------------------------------------
 
@@ -192,13 +171,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `email`, `password`, `username`) VALUES
-(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura'),
-(2, 2, 'anotheremail@email.com', 'password2', 'reg_user'),
-(3, 1, 'email@email.com', 'password', 'admin_user'),
-(9, 2, 'thisemail@email.com', 'password', 'Newuser'),
-(11, 2, 'differentemail@email.com', 'password', 'DifferentUser'),
-(15, 2, 'cl.reiss@gmail.com', 'password', 'Caroline'),
-(4,3,'guest@guest.com','guest','Guest');
+(1, 1, 'laura.rowlands02@gmail.com', 'Password1', 'Laura');
 
 -- --------------------------------------------------------
 
