@@ -15,7 +15,7 @@
   <div class="w3-card-4 w3-margin w3-white">
       <?php
 
-$file = 'views/images/' . $post->title . '.jpeg';
+$file = 'views/images/' . trim($post->title). '.jpeg';
 if (file_exists($file)) {
         $img = "<img src='$file' style=width:'100%' />";
     echo $img;

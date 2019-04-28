@@ -19,7 +19,7 @@ class Post {
 
     //public $userid;
 
-    public function __construct($id, $title, $content, $post_date = false, $comments = false, $tag = false, $location = false, $views = false, $likes=false) {
+    public function __construct($id, $title, $content, $post_date = false, $comments = false, $tag = false, $location = false, $views = false, $likes = false) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
@@ -31,86 +31,79 @@ class Post {
         $this->likes = $likes;
         //$this->userid = $userid;
     }
-    
+
     public static function addView($id) {
         $db = Db::getInstance();
         $req = $db->prepare("INSERT INTO view(post_id) VALUES(:post_id);");
         $req->bindParam(':post_id', $post_id);
-        
+
         $post_id = $id;
 
         $req->execute();
     }
-    
+
     public static function getViews($id) {
         $db = Db::getInstance();
         $req = $db->prepare("SELECT COUNT(id) as total_views FROM view WHERE post_id=:post_id;");
         $req->bindParam(':post_id', $post_id);
-        
+
         $post_id = $id;
-        
+
         $req->execute();
-        $list=[];
+        $list = [];
         foreach ($req->fetchAll() as $view) {
-            array_push($list,$view);
+            array_push($list, $view);
         }
-        
+
         return $list[0][0];
-        
-       
-        
     }
-    
-     public static function tagsSearch($tagid) {
+
+    public static function tagsSearch($tagid) {
         $list = [];
         $db = Db::getInstance();
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
-        
-        $req->execute(array ('TAG_ID'=>$tagid));
+
+        $req->execute(array('TAG_ID' => $tagid));
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'], $post['location']);
         }
         return $list;
     }
-    
-    
+
     public static function postSearch() {
         $list = [];
         $db = Db::getInstance();
         $req = $db->prepare("SELECT p.* FROM post as p LEFT JOIN POSTTAG as pt on p.id=pt.post_id where pt.tag_id=:TAG_ID");
         $req->bindParam(':TAG_ID', $tagid);
-        
+
         $tagid = $_POST['tag'];
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'], $post['post_date'], $post['location']);
         }
         return $list;
     }
-    
+
     public static function postSearchTitle() {
         $list = [];
         $db = Db::getInstance();
-        
+
         $req = $db->prepare("SELECT * from POST WHERE TITLE LIKE :input");
 
         $searchtext = "%{$_POST['input']}%";
-        $req->bindParam(':input',$searchtext);
+        $req->bindParam(':input', $searchtext);
 
-        
+
         $req->execute();
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'], $post['post_date'], $post['location']);
         }
         return $list;
     }
-    
-   
-
 
     /* This all() function prints out all of the blog posts, which then are printed in the readAll.php page (linked by post_controller.php) */
 
@@ -140,14 +133,14 @@ class Post {
         $tag = Tag::find($id);
         $views = Post::getViews($id);
         $likes = Like::find($id);
-        
+
         if ($post['location'] == 'NA' || $post['location'] == 'N/A' || $post['location'] == 'unknown') {
             $locationfiltered = 'Unknown location';
+        } else {
+            $locationfiltered = $post['location'];
         }
-        else {$locationfiltered = $post['location'];
-        }
-        
-        
+
+
         if ($post) {
             return new Post($post['id'], $post['title'], $post['content'], $post['post_date'], $comments, $tag, $locationfiltered, $views, $likes);
         } else {
@@ -189,6 +182,17 @@ class Post {
     /* For now ADDED user_id into the function and hardcoded the result to marry with our ADMIN user on PK 1 in the database */
 
     public static function add() {
+         if (isset($_POST['title']) && $_POST['title'] != "") {
+            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        $title = trim($filteredTitle);
+        
+        //upload post image
+        $errors = Post::uploadFile($title);
+        if ($errors) {
+            return $errors;
+        }
+        
         $db = Db::getInstance();
         $req = $db->prepare("Insert into post(title, content, user_id, post_date, location) values (:title, :content, :user_id, NOW(), :location);");
         $req->bindParam(':title', $title);
@@ -196,35 +200,30 @@ class Post {
         $req->bindParam(':user_id', $user_id);
         $req->bindParam(':location', $location);
 
-// set parameters and execute
-        if (isset($_POST['title']) && $_POST['title'] != "") {
-            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-        }
+        // set parameters and execute
+       
         if (isset($_POST['content']) && $_POST['content'] != "") {
             $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
         }
         //echo var_dump($_POST);
-        $title = $filteredTitle;
+        
         $content = $filteredContent;
         $user_id = 1;
-        
+
         //Get location of post
         $location = Post::getLocationFromIP();
-        
+
         $req->execute();
 
-//upload post image
-        Post::uploadFile($title);
+        
+        //upload multiple tags
+        if (isset($_POST['tag'])) {
+            $tag = $_POST['tag'];
 
-//upload multiple tags
-        if(isset($_POST['tag'])) {
-        $tag = $_POST['tag'];
-
-        foreach ($tag as $value) {
-            Post::addTag($value);
+            foreach ($tag as $value) {
+                Post::addTag($value);
+            }
         }
-        }   
-
     }
 
     public static function addTag($tag_id) {
@@ -248,39 +247,36 @@ class Post {
     const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
     const InputKey = 'myUploader';
 
-//die() function calls replaced with trigger_error() calls
-//replace with structured exception handling
+    //die() function calls replaced with trigger_error() calls
+    //replace with structured exception handling
     public static function uploadFile(string $title) {
-                
+        $genericError = 'Something is wrong with the uploaded file, please try again...';
         if (empty($_FILES[self::InputKey])) {
-                        //die("File Missing!");
-                        trigger_error("File Missing!");
-                }
-
-                if ($_FILES[self::InputKey]['error'] > 0) {
-                        trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
-                }
-
-
-                if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
-                        trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
-                }
-                
-        //changed the $path location  - implfied it to only views/images/
-                $tempFile = $_FILES[self::InputKey]['tmp_name'];
-                $path = "views/images/";
-                $destinationFile = $path . $title . '.jpeg';
-
-                if (!move_uploaded_file($tempFile, $destinationFile)) {
-                        trigger_error("Handle Error");
-                }
-
-                //Clean up the temp file
-                if (file_exists($tempFile)) {
-                        unlink($tempFile); 
-                }
+            return 'File Missing!';
+        } //this shouldn't occur because of front end validation
+        if ($_FILES[self::InputKey]['error'] > 0) {
+            return $genericError;
         }
-    
+        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+            return 'A file of the wrong type was uploaded, please try again...';
+        }
+
+
+        //changed the $path location  - implfied it to only views/images/
+        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+        $path = "views/images/";
+        $destinationFile = $path . trim($title) . '.jpeg';
+
+        if (!move_uploaded_file($tempFile, $destinationFile)) {
+            return $genericError;
+        }
+        //Clean up the temp file
+        if (file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+
+        return false;
+    }
 
     /* The remove($id) function is used to remove blog posts, is used in readAll.php (linked by product_controller) */
     /* Once have started logins, should make accessible to only admins */
@@ -295,14 +291,14 @@ class Post {
         Post::deleteViews($id);
         $req->execute(array('id' => $id));
     }
-    
+
     public static function deleteViews($post_id) {
-    $db = Db::getInstance();
-        
+        $db = Db::getInstance();
+
         $req = $db->prepare('delete FROM view WHERE post_id = :post_id');
         // the query was prepared, now replace :id with the actual $id value
         $req->execute(array('post_id' => $post_id));
-}
+    }
 
     public static function getLocationFromIP() {
         try {
@@ -331,7 +327,7 @@ class Post {
         }
     }
 
-    public static function userpost ($user_id) {
+    public static function userpost($user_id) {
         $list = [];
         $db = Db::getInstance();
         //use intval to make sure $id is an integer
@@ -343,7 +339,7 @@ class Post {
 
         foreach ($req->fetchAll() as $post) {
             if ($post) {
-            $list[] = new Post( $post['id'], $post['title'],$post['content']); 
+                $list[] = new Post($post['id'], $post['title'], $post['content']);
             }
         }
 
@@ -351,8 +347,7 @@ class Post {
             return $list;
         }
     }
-    
-    
+
 }
 ?>
 
