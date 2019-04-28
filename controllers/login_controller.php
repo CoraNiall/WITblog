@@ -19,7 +19,7 @@ class LoginController {
         }
          $validEmail = $_POST['email'];  
         if (!filter_var($validEmail, FILTER_VALIDATE_EMAIL)) {
-        echo "Please enter an email in a valid format"; 
+        die("Please enter an email in a valid format"); 
         }
         
         try {
