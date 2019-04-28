@@ -17,10 +17,10 @@
 
 $file = 'views/images/' . trim($post->title). '.jpeg';
 if (file_exists($file)) {
-        $img = "<img src='$file' style=width:'100%' />";
+        $img = "<img src='$file' width='100%' />";
     echo $img;
 } else {
-    echo "<img src='views/images/standard/_noproductimage.png' style=width:'100%' />";
+    echo "<img src='views/images/standard/_noproductimage.png' width='100%' />";
 }
 ?>
     <div class="w3-container">
