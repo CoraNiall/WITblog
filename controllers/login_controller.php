@@ -19,21 +19,24 @@ class LoginController {
         }
          $validEmail = $_POST['email'];  
         if (!filter_var($validEmail, FILTER_VALIDATE_EMAIL)) {
-          return "Invalid email format";
-            call('pages', 'error');
+        echo "Please enter an email in a valid format"; 
         }
         
         try {
-                Login::create();
-                $user = Login::getUser($_POST['username']);
+               $register = Login::create();
+                 
+            }catch (Exception $ex) {
+                return call('pages','error');
+                        }
+        if(!$register) {
+            return call('pages', 'error');
+                } else {
+        $user = Login::getUser($_POST['username']);
                 echo "<div class='alert alert-info'>";
                  echo "Thanks for registering!";
                  echo "</div>";
                 require_once('views/login/userProfile.php');
-                 
-        }catch (Exception $ex) {
-            return call('pages','error');
-        }
+        } 
     }
     }
         
