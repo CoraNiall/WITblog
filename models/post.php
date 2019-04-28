@@ -186,6 +186,11 @@ class Post {
             $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
         }
         $title = trim($filteredTitle);
+        if(isset($_SESSION['username'])&& $_SESSION['username']!=""){
+            $username = $_SESSION['username'];
+        }   else{
+            $username = "Guest";    
+            }
         
         //upload post image
         $errors = Post::uploadFile($title);
@@ -194,10 +199,10 @@ class Post {
         }
         
         $db = Db::getInstance();
-        $req = $db->prepare("Insert into post(title, content, user_id, post_date, location) values (:title, :content, :user_id, NOW(), :location);");
+        $req = $db->prepare("Insert into post(title, content, user_id, post_date, location) values (:title, :content, (SELECT id FROM user WHERE username=:username), NOW(), :location);");
         $req->bindParam(':title', $title);
         $req->bindParam(':content', $content);
-        $req->bindParam(':user_id', $user_id);
+        $req->bindParam(':username', $username);
         $req->bindParam(':location', $location);
 
         // set parameters and execute
@@ -208,7 +213,7 @@ class Post {
         //echo var_dump($_POST);
         
         $content = $filteredContent;
-        $user_id = 1;
+        
 
         //Get location of post
         $location = Post::getLocationFromIP();
@@ -228,7 +233,7 @@ class Post {
 
     public static function addTag($tag_id) {
         $db = Db::getInstance();
-        $req = $db->prepare("INSERT INTO POSTTAG(POST_ID,TAG_ID) VALUES((SELECT ID FROM POST WHERE TITLE=:title), :TAG_ID);");
+        $req = $db->prepare("INSERT INTO posttag(post_id,tag_id) VALUES((SELECT id FROM post WHERE title=:title), :TAG_ID);");
         $req->bindParam(':title', $title);
         $req->bindParam(':TAG_ID', $id);
 
