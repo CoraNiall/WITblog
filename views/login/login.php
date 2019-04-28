@@ -2,7 +2,7 @@
 <html>
     <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
     
-    <form action="" method="POST" class="w3-container" enctype="multipart/form-data">
+    <form action="?controller=login&action=login" method="POST" class="w3-container" enctype="multipart/form-data">
     
     <h2>Fill in the following form to login:</h2>
     <br>
