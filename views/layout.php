@@ -30,7 +30,7 @@ session_start();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href='?controller=pages&action=home'>W.I.T Blog</a>
+                        <a class="navbar-brand" href='?controller=pages&action=home'>T.L.C Blog</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -80,9 +80,9 @@ session_start();
         <br>
         <div>
             <section class="banner-section">
-                <div class="w3-content">
-                    <img class="mySlides"  src="https://www.snipp.com/wp-content/uploads/2018/12/Women-in-tech-blog-banner.png" alt="custom_html_banner1" width="99%" height="250em" >
-                </div>
+               
+                    <img class="mySlides"  src="https://www.snipp.com/wp-content/uploads/2018/12/Women-in-tech-blog-banner.png" alt="custom_html_banner1" width="70%" height="250em" >
+ 
             </section>
         </div>
         <br>

@@ -28,12 +28,12 @@ if (file_exists($file)) {
     echo "<img src='views/images/standard/_noproductimage.png' width='150' />";
 }
 ?>
-
+    
 </div>
-
+<br>
 <div>
     <div>
-        <p class="blog"style="white-space: pre-line"><?php echo $post->content; ?></p>
+        <p class="blog"style="white-space: pre-line; font-family: raleway"><?php echo $post->content; ?></p>
     </div>
 </div>
        
