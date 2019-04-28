@@ -1,10 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
         
 class LoginController {
     
@@ -46,26 +40,20 @@ public function login(){
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         require_once('views/login/login.php');
     } else {
-               /* if(isset($_POST['username'])&& $_POST['username']!="") {
-        $filteredUsername = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
-        }  
-    $username = $filteredUsername;*/
+               
         $login= Login::login($_POST['username'], $_POST['password'], $_POST['email']);
       
         if ($login){  
            Login::setSession($login);
            $user = Login::getUser($_POST['username']);
             require_once('views/login/userProfile.php');
-        //echo "<div class='alert alert-info'>";
-        //echo "Successfully logged in.";
-    //echo "</div>";
+        
 }
     }
 }
 
 public function logout() {
 
-    //if($_SERVER['REQUEST_METHOD'] == 'GET') {
         Login::logout();
         require_once('views/login/logout.php');
     }

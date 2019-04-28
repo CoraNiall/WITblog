@@ -99,7 +99,6 @@ $req->execute();
     $username = $filteredUsername;
     $password = $filteredPassword;
     $email = $filteredEmail;
-        //$req->bindParam (':username', $username);
         $req->execute(array('username'=>$username,
                             'password'=>$password,
                             'email'=>$email));
@@ -159,14 +158,6 @@ $req->execute(array('username'=>$username,
         if (!empty($_FILES[self::InputKey]['name'])) {
         Login::uploadFile($username);
         }
-        
-        
-        /*$user = $req->fetch();
-        if($user) {
-            return new Login($user['username'], $user['email'], $user['password'], $user['role_id']);
-        } else {
-            throw new Exception('User not found.');
-        }*/
 }
 
 const AllowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
