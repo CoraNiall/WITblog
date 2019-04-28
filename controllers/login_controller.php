@@ -25,6 +25,7 @@ class LoginController {
         
         try {
                 Login::create();
+                $user = Login::getUser($_POST['username']);
                 echo "<div class='alert alert-info'>";
                  echo "Thanks for registering!";
                  echo "</div>";
