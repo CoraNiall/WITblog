@@ -182,6 +182,17 @@ class Post {
     /* For now ADDED user_id into the function and hardcoded the result to marry with our ADMIN user on PK 1 in the database */
 
     public static function add() {
+         if (isset($_POST['title']) && $_POST['title'] != "") {
+            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        $title = trim($filteredTitle);
+        
+        //upload post image
+        $errors = Post::uploadFile($title);
+        if ($errors) {
+            return $errors;
+        }
+        
         $db = Db::getInstance();
         $req = $db->prepare("Insert into post(title, content, user_id, post_date, location) values (:title, :content, :user_id, NOW(), :location);");
         $req->bindParam(':title', $title);
@@ -190,14 +201,12 @@ class Post {
         $req->bindParam(':location', $location);
 
         // set parameters and execute
-        if (isset($_POST['title']) && $_POST['title'] != "") {
-            $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-        }
+       
         if (isset($_POST['content']) && $_POST['content'] != "") {
             $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
         }
         //echo var_dump($_POST);
-        $title = $filteredTitle;
+        
         $content = $filteredContent;
         $user_id = 1;
 
@@ -206,11 +215,7 @@ class Post {
 
         $req->execute();
 
-        //upload post image
-        $errors = Post::uploadFile($title);
-        if ($errors) {
-            return $errors;
-        }
+        
         //upload multiple tags
         if (isset($_POST['tag'])) {
             $tag = $_POST['tag'];
