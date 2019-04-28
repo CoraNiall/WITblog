@@ -4,9 +4,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel = "stylesheet" type = "text/css" href = "views/css/styles.css" />
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
+
 <?php require_once('models/view.php');
 
 $post = MostViewed()[0];?>
@@ -104,11 +102,17 @@ $post = MostViewed()[0];?>
     </div>
 
     <div class="w3-container">
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>Hodor! Hodor hodor. Hodor hodor! Hodor, hodor. Hodor. Hodor. Hodor hodor! Hodor hodor HODOR! Hodor.
+
+Hodor, hodor, hodor hodor. Hodor? Hodor, hodor. Hodor. Hodor. Hodor? Hodor hodor. Hodor hodor! Hodor... Hodor hodor. Hodor hodor! Hodor hodor HODOR! Hodor.
+
+Hodor! Hodor hodor. Hodor, hodor, hodor hodor. Hodor hodor! Hodor hodor!
+
+HODOR HODOR! Hodor? 
+</p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+          <p><button class="w3-button w3-padding-large w3-white w3-border" href='?controller=post&action=read&id=<?php echo $post->id; ?>'><b>READ MORE »</b></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
           <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
