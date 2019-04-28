@@ -17,7 +17,7 @@
         <p>
             <br>
             <label>Content</label> <br>
-            <textarea rows="15" cols="110" <input class="w3-input" type="text" name="content" required > </textarea>
+            <textarea rows="15" cols="90" <input class="w3-input" type="text" name="content" required > </textarea>
 
         </p>
 

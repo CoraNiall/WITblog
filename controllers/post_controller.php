@@ -89,6 +89,25 @@ class PostController {
             require_once('views/posts/readAll.php');
       }
       
+            public function readuser() {
+        if (!isset($_GET['user_id']))
+        return call('pages', 'error');
+
+      try{
+      // we use the given id to get the correct post
+      $user_id =$_GET['user_id'];
+      $posts = Post::userpost ($user_id);
+    
+     
+      require_once('views/posts/userPost.php');
+      }
+ catch (Exception $ex){
+     return call('pages','error');
+ }
+          
+      }
+      
+      
     }
   
 ?>
