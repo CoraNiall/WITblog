@@ -44,11 +44,11 @@ session_start();
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Authors <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="?controller=post&action=readuser&user_id=1">Melanie</a></li>
-                                    <li><a href="?controller=post&action=readuser&user_id=1">Caroline</a></li>
-                                    <li><a href="?controller=post&action=readuser&user_id=1">Jessie</a></li>
+                                    <li><a href="?controller=post&action=readuser&user_id=16">Melanie</a></li>
+                                    <li><a href="?controller=post&action=readuser&user_id=19">Caroline</a></li>
+                                    <li><a href="?controller=post&action=readuser&user_id=18">Jessie</a></li>
                                     <li><a href="?controller=post&action=readuser&user_id=1"> Laura</a></li>
-                                    <li><a href="?controller=post&action=readuser&user_id=3">Tasha</a></li>
+                                    <li><a href="?controller=post&action=readuser&user_id=17">Tasha</a></li>
 
                                 </ul>
                             </li>
@@ -155,7 +155,7 @@ session_start();
                         </center>
                     </div>
                     <div class="list-group">
-                        <a class="list-group-item active" href='?controller=post&action=searchTags&tag=2' method='GET' name='tag'> <h4 class="list-group-item-heading"> Women in Tech</h4> <p class="list-group-item-text"></p> </a>
+                        <a class="list-group-item" href='?controller=post&action=searchTags&tag=2' method='GET' name='tag'> <h4 class="list-group-item-heading"> Women in Tech</h4> <p class="list-group-item-text"></p> </a>
                         <a class="list-group-item"  href='?controller=post&action=searchTags&tag=14' method='GET' name='tag'> <h4 class="list-group-item-heading"> Got Skills? </h4> <p class="list-group-item-text"></p> </a>
                         <a class="list-group-item"  href='?controller=post&action=searchTags&tag=1' method='GET' name='tag'> <h4 class="list-group-item-heading">Top Tech </h4> <p class="list-group-item-text"></p> </a> </div>
 
