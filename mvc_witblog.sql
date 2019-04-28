@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Database: `mvc_witblog`
 --
 
+DROP DATABASE IF EXISTS mvc_witblog;
+CREATE DATABASE mvc_witblog;
+USE mvc_witblog;
+
 -- --------------------------------------------------------
 
 --
@@ -115,9 +119,6 @@ CREATE TABLE `posttag` (
 --
 
 INSERT INTO `posttag` (`post_id`, `tag_id`) VALUES
-(30, 1),
-(30, 3),
-(32, 3),
 (33, 1),
 (33, 3),
 (34, 1),
@@ -261,8 +262,6 @@ CREATE TABLE `view` (
 --
 
 INSERT INTO `view` (`id`, `post_id`) VALUES
-(1, 30),
-(2, 31),
 (4, 33),
 (5, 33),
 (9, 33),
