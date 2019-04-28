@@ -96,22 +96,16 @@ $post = MostViewed()[0];?>
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
-        <p class="blogHeading"><b>Hodor</b>
-        <h5><span class="w3-opacity">April 7, 2014</span></h5></p>
+        <p class="blogHeading"><b>A Coding Tale</b>
+        <h5><span class="w3-opacity">April 7, 2019</span></h5></p>
     </div>
 
     <div class="w3-container">
-      <p>Hodor! Hodor hodor. Hodor hodor! Hodor, hodor. Hodor. Hodor. Hodor hodor! Hodor hodor HODOR! Hodor.
-
-        Hodor, hodor, hodor hodor. Hodor? Hodor, hodor. Hodor. Hodor. Hodor? Hodor hodor. Hodor hodor! Hodor... Hodor hodor. Hodor hodor! Hodor hodor HODOR! Hodor.
-
-        Hodor! Hodor hodor. Hodor, hodor, hodor hodor. Hodor hodor! Hodor hodor!
-
-        HODOR HODOR! Hodor? 
+      <p>When I applied for this course I had almost no idea of what to expect. I knew I'd be learning PHP, but after a couple of codeAcademy courses on HTML and CSS this didn't mean a whole lot. I also knew someone who had done it the year before and who had come from a similar educational background and she only had good things to say and convinced me it was worth applying.
 </p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border" ><a href='?controller=post&action=read&id=<?php echo $post->id; ?>'>READ MORE »</a></button></p>
+          <p><button class="w3-button w3-padding-large w3-white w3-border" ><a href='?controller=post&action=read&id=33'>READ MORE »</a></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
           <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
@@ -124,16 +118,15 @@ $post = MostViewed()[0];?>
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
-       <p class="blogHeading"><b>TITLE HEADING</b>
-      <h5><span class="w3-opacity">April 2, 2014</span></h5>
+       <p class="blogHeading"><b>Making Toast</b>
+      <h5><span class="w3-opacity">April 2, 2019</span></h5>
     </div>
 
     <div class="w3-container">
-      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
-        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p>With the decorations packed away and memories of family time and festivities fading, the second Monday of January saw me and fifteen other women arrive on a chilly morning for the first day of our Get Into Tech course at Sky’s offices at Leeds Dock. Despite being only a week before Blue Monday, in what is typically dubbed as one of the most depressing weeks of the year, the nervous excitement was palpable.</p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+            <p><button class="w3-button w3-padding-large w3-white w3-border"><a href='?controller=post&action=read&id=35'><b>READ MORE »</a></b></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
           <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>

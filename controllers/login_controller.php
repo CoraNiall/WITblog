@@ -17,22 +17,20 @@ class LoginController {
         }
         
         try {
-               $register = Login::create();
+               Login::create();
                  
-            }catch (Exception $ex) {
-                return call('pages','error');
-                        }
-        if(!$register) {
-            return call('pages', 'error');
-                } else {
+           }catch (Exception $ex) {
+              return call('pages','error');
+                       }
+        
         $user = Login::getUser($_POST['username']);
                 echo "<div class='alert alert-info'>";
                  echo "Thanks for registering!";
                  echo "</div>";
-                require_once('views/login/userProfile.php');
+                require_once('views/login/login.php');
         } 
     }
-    }
+    
         
     //this is accessing the login form
 public function login(){
