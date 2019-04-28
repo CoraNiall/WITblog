@@ -125,7 +125,8 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `roles`) VALUES
 (1, 'admin'),
-(2, 'registered_user');
+(2, 'registered_user'),
+(3, 'Guest');
 
 -- --------------------------------------------------------
 
@@ -196,7 +197,8 @@ INSERT INTO `user` (`id`, `role_id`, `email`, `password`, `username`) VALUES
 (3, 1, 'email@email.com', 'password', 'admin_user'),
 (9, 2, 'thisemail@email.com', 'password', 'Newuser'),
 (11, 2, 'differentemail@email.com', 'password', 'DifferentUser'),
-(15, 2, 'cl.reiss@gmail.com', 'password', 'Caroline');
+(15, 2, 'cl.reiss@gmail.com', 'password', 'Caroline'),
+(4,3,'guest@guest.com','guest','Guest');
 
 -- --------------------------------------------------------
 
