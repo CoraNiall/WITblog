@@ -35,7 +35,11 @@ session_start();
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href='?controller=post&action=readAll'>All Posts</a></li>
+                            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && ($_SESSION ['role_id'] == 1)) { ?>
                             <li><a href='?controller=post&action=create'>Create Post</a></li>
+                            <?php } else { ?>
+                            
+                            <?php } ?>
                             <li> <a href="#">Search</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Authors <span class="caret"></span></a>
