@@ -67,7 +67,7 @@ class Post {
         $req->execute(array('TAG_ID' => $tagid));
         // we create a list of Post objects from the database results
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['id'], $post['title'], $post['content'], $post['location']);
+            $list[] = new Post($post['id'], $post['title'], $post['content'],$post['post_date'], $post['location']);
         }
         return $list;
     }
